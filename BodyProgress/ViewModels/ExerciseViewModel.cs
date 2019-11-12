@@ -5,19 +5,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BodyProgress.Models
+namespace BodyProgress.ViewModels
 {
-    public class Exercise
+    public class ExerciseViewModel
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
-        public Guid Id { get; set; }
+        public Guid ExerciseId { get; set; }
         public string Name { get; set; }
-
-        public Exercise()
-        {
-            this.Id = System.Guid.NewGuid();
-        }
     }
-
 }

@@ -15,6 +15,12 @@ namespace BodyProgress.Logic
             _context = context;
         }
 
+        public void CreateExercise(Exercise exercise)
+        {
+            _context.Exercises.Add(exercise);
+            _context.SaveChanges();
+        }
+
         public List<Exercise> ReturnAllExercises()
         {
             return _context.Exercises.ToList();

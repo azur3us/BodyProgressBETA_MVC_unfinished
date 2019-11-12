@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace BodyProgress.Logic
 {
-    interface IExerciseService
+    public interface IExerciseService
     {
         List<Exercise> ReturnAllExercises();
+        void CreateExercise(Exercise exercise);
     }
 }
