@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace BodyProgress.Models
 {
-    public class BodyProgressDbContext : DbContext
+    public class BodyProgressDbContext : IdentityDbContext<IdentityUser>
     {
         public BodyProgressDbContext(DbContextOptions<BodyProgressDbContext> options): base(options)
         {
@@ -12,11 +13,10 @@ namespace BodyProgress.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Exercise>().Property(e => e.Id).HasDefaultValueSql("NEWID()");
         }
 
-        public DbSet<Exercise> Exercises { get; set; }
-        //protected void OnConfiguration(DbContextOptionsBuilder optionsBuilder)
-        //    => optionsBuilder.UseNpgsql("Host=LocalHost; Database=BodyProgressDataBase; Username=azureus;Password=bodyprogress");
+        public DbSet<Exercise> Exercises { get; set; }       
     }
 }
