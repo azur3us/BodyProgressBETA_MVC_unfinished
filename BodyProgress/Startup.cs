@@ -31,7 +31,7 @@ namespace BodyProgress
         {
           
             services.AddTransient<IExerciseService, ExerciseService>();
-            services.AddMvc();
+            services.AddMvc().AddRazorRuntimeCompilation();
             services.AddDbContext<BodyProgressDbContext>(oprions => oprions.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<BodyProgressDbContext>();
         }
