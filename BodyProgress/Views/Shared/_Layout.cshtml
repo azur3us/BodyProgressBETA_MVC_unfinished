@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+<!DOCTYPE html>
+@inject SignInManager<IdentityUser> SignInManager
 
 <html>
 <head>
@@ -22,9 +24,6 @@
                 <li class="nav-item">
                     <a asp-action="AddExercise" asp-controller="Exercise" class="nav-link">Dodaj ćwiczenie</a>
                 </li>
-                <li class="nav-item">
-                    @(User.Identity.Name)
-                </li>
                 @*<li>
                 <a asp-action="LogOut" asp-controller="Account" class="nav-link">Wyloguj</a>
                 <ul class="m-0 p-0">
@@ -34,16 +33,19 @@
             </li>*@
 
             </ul>
-            <form asp-controller="Account" asp-action="Logout" id="logoutForm" method="post">
-                <ul class="m-0 p-0">
-                    <li class="nav-link text-warning">@User.Identity.Name <a class="text-decoration-none" href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a></li>
+            @if (SignInManager.IsSignedIn(User))
+            { 
+                <form asp-controller="Account" asp-action="Logout" id="logoutForm" method="post">
+                    <ul class="m-0 p-0">
+                        <li class="nav-link text-warning">@User.Identity.Name <a class="text-decoration-none" href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a></li>
 
-                </ul>
-            </form>
+                    </ul>
+                </form>
+                }
         </div>
-    </nav>
-    <div>
-        @RenderBody()
-    </div>
-</body>
+        </nav>
+        <div>
+            @RenderBody()
+        </div>
+    </body>
 </html>
