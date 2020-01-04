@@ -24,14 +24,14 @@
                 <li class="nav-item">
                     <a asp-action="AddExercise" asp-controller="Exercise" class="nav-link">Dodaj ćwiczenie</a>
                 </li>
-                @*<li>
-                <a asp-action="LogOut" asp-controller="Account" class="nav-link">Wyloguj</a>
-                <ul class="m-0 p-0">
-                    <li class="nav-link text-warning">@User.Identity.Name <a class="text-decoration-none" href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a></li>
-
+                <ul class="navbar-nav">
+                    <li>
+                        <a asp-action="Register" asp-controller="Account" class="nav-link">Rejestracja</a>
+                    </li>
+                    <li>
+                        <a asp-action="Login" asp-controller="Account" class="nav-link">Zaloguj</a>
+                    </li>
                 </ul>
-            </li>*@
-
             </ul>
             @if (SignInManager.IsSignedIn(User))
             { 

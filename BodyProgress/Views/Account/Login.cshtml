@@ -2,8 +2,9 @@
 
 <div class="sidenav">
     <div class="login-main-text">
-        <h2>Application<br> Login Page</h2>
-        <p>Login from here to access.</p>
+        <h2>Okno logowania <a asp-action="Index" asp-controller="Home" class="text-decoration-none">BodyProgress</a></h2>
+        <h4>Zaloguj się, aby uzykać dostęp.</h4>
+        <p>Jeśli nie masz konta kliknij -> <a asp-action="Register" asp-controller="Account">ZAREJESTRUJ</a></p>
     </div>
 </div>
 <div class="main">
@@ -11,15 +12,14 @@
         <div class="login-form">
             <form asp-action="Login" asp-controller="Account" method="post">
                 <div class="form-group">
-                    <label asp-for="UserName"></label>
-                    <input asp-for="UserName">
+                    <div class="form-group">
+                        <input placeholder="Nazwa użytkownika" asp-for="UserName">
+                    </div>
+                    <div class="form-group">
+                        <input placeholder="Hasło" asp-for="Password">
+                    </div>
+                    <input type="submit" class="btn btn-success" value="Zaloguj" />
                 </div>
-                <div class="form-group">
-                    <label asp-for="Password"></label>
-                    <input asp-for="Password">
-                </div>
-                <input type="submit" class="btn btn-black" value="Login"/>
-                @*<button type="submit" class="btn btn-secondary">Register</button>*@
             </form>
         </div>
     </div>
