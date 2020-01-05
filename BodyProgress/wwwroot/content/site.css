@@ -1,3 +1,11 @@
 ﻿body {
     font-family: "Lato", sans-serif;
 }
+.footer {
+    background-color: #000;
+    min-height: 60px;
+    color:#fff
+}
+.content {
+    min-height: calc(100vh - 60px);
+}
