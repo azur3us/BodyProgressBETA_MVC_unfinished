@@ -28,9 +28,14 @@ namespace BodyProgress.Controlles
         [HttpPost]
         public IActionResult AddExercise(Exercise exercise)
         {           
+            if(ModelState.IsValid)
+            { 
             _exerciseService.CreateExercise(exercise);
             return RedirectToAction("AddExercise");
-  
+            }
+
+            return View();
+
         }
     }
 }
