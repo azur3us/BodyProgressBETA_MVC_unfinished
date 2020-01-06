@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BodyProgress.Logic;
 using BodyProgress.Models;
 using BodyProgress.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
@@ -26,6 +27,7 @@ namespace BodyProgress.Controlles
         }
 
         [HttpPost]
+        [Authorize(Roles ="Admin")]
         public IActionResult AddExercise(Exercise exercise)
         {           
             if(ModelState.IsValid)
