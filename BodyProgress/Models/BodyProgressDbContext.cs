@@ -17,6 +17,7 @@ namespace BodyProgress.Models
             modelBuilder.Entity<Exercise>().Property(e => e.Id).HasDefaultValueSql("NEWID()");
         }
 
-        public DbSet<Exercise> Exercises { get; set; }       
+        public DbSet<Exercise> Exercises { get; set; }  
+        public DbSet<PartOfBody> PartOfBodies { get; set; }
     }
 }

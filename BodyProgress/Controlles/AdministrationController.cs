@@ -1,4 +1,6 @@
-﻿using BodyProgress.ViewModels;
+﻿using BodyProgress.Logic;
+using BodyProgress.Models;
+using BodyProgress.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,11 +11,13 @@ namespace BodyProgress.Controlles
 {
     public class AdministrationController : Controller
     {
+        private readonly IPartOfBodyService _partOfBodyService;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AdministrationController(RoleManager<IdentityRole> roleManager)
+        public AdministrationController(IPartOfBodyService partOfBodyService, RoleManager<IdentityRole> roleManager)
         {
             _roleManager = roleManager;
+            _partOfBodyService = partOfBodyService;
         }
 
         [HttpGet]
@@ -46,6 +50,26 @@ namespace BodyProgress.Controlles
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult AddPartOfBody()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddPartOfBody(PartOfBodyViewModel model)
+        {
+            var partOfBody = new PartOfBody()
+            {
+                Name = model.Name
+            };
+
+            _partOfBodyService.AddParfOfBody(partOfBody);
+
+            return RedirectToAction("AddPartOfBody");
+
         }
 
     }
