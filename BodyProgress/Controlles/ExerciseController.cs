@@ -28,16 +28,35 @@ namespace BodyProgress.Controlles
 
         [HttpPost]
         [Authorize(Roles ="Admin")]
-        public IActionResult AddExercise(Exercise exercise)
-        {           
-            if(ModelState.IsValid)
-            { 
-            _exerciseService.CreateExercise(exercise);
-            return RedirectToAction("AddExercise");
+        public IActionResult AddExercise(ExerciseViewModel model)
+        {
+
+            var exerciseViewModel = new Exercise()
+            {
+                Name = model.Name
+            };
+
+            if (ModelState.IsValid)
+            {
+                _exerciseService.CreateExercise(exerciseViewModel);
+                return RedirectToAction("AddExercise");
             }
 
-            return View();
 
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult ShowAllExercises()
+        {
+            var exercises = _exerciseService.ReturnAllExercises().OrderBy(x => x.Name);
+
+            var exerciseViewModel = new ExerciseViewModel()
+            {
+                Exercises = exercises.ToList()
+            };
+
+            return View(exerciseViewModel);
         }
     }
 }

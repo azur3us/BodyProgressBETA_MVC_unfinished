@@ -1,4 +1,5 @@
-﻿using BodyProgress.Models;
+﻿
+using BodyProgress.ViewModels;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BodyProgress.Validators
 {
-    public class ExerciseValidator : AbstractValidator<Exercise>
+    public class ExerciseValidator : AbstractValidator<ExerciseViewModel>
     {
         public ExerciseValidator()
         {

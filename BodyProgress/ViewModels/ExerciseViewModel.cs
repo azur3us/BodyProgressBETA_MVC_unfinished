@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using BodyProgress.Models;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,6 +14,7 @@ namespace BodyProgress.ViewModels
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid ExerciseId { get; set; }
         public string Name { get; set; }
- 
+        public List<Exercise> Exercises { get; set; }
+
     }
 }
