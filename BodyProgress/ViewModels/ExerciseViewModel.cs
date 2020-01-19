@@ -11,8 +11,6 @@ namespace BodyProgress.ViewModels
 {
     public class ExerciseViewModel
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid ExerciseId { get; set; }
         public string Name { get; set; }
         public List<Exercise> Exercises { get; set; }
 
