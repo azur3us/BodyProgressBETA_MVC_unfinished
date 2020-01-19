@@ -30,13 +30,13 @@ namespace BodyProgress.Controlles
         }
 
         [HttpPost]
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult AddExercise(ExerciseViewModel model)
         {
-
             var exerciseViewModel = new Exercise()
             {
-                Name = model.Name
+                Name = model.Name,
+                PartOfBodyId = model.PartOfBodyId
             };
 
             if (ModelState.IsValid)
@@ -44,7 +44,6 @@ namespace BodyProgress.Controlles
                 _exerciseService.CreateExercise(exerciseViewModel);
                 return RedirectToAction("AddExercise");
             }
-
 
             return View();
         }

@@ -15,6 +15,8 @@ namespace BodyProgress.Models
         [Key]
         public Guid Id { get; set; }
         public string Name { get; set; }
+
+        public Guid PartOfBodyId { get; set; }
         public PartOfBody PartOfBody { get; set; }
 
         public Exercise()
