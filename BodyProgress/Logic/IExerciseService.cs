@@ -1,4 +1,5 @@
 ﻿using BodyProgress.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace BodyProgress.Logic
     {
         List<Exercise> ReturnAllExercises();
         void CreateExercise(Exercise exercise);
+        List<SelectListItem> ShowPartOfBodyToSelect();
     }
 }

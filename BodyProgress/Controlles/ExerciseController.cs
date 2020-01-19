@@ -8,6 +8,7 @@ using BodyProgress.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BodyProgress.Controlles
 {
@@ -23,7 +24,9 @@ namespace BodyProgress.Controlles
         [HttpGet]
         public IActionResult AddExercise()
         {
-            return View();
+            var myVM = new ExerciseViewModel();
+            myVM.PartOfBodies = _exerciseService.ShowPartOfBodyToSelect();
+            return View(myVM);
         }
 
         [HttpPost]

@@ -3,5 +3,5 @@
 
 @foreach(var exercise in Model.Exercises)
 {
-    <h4>@exercise.Name</h4>
+    <h4>@exercise.Name @exercise.PartOfBody.Name</h4>
 }
