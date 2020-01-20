@@ -10,7 +10,10 @@ namespace BodyProgress.Logic
     public interface IExerciseService
     {
         List<Exercise> ReturnAllExercises();
+        Exercise TakeExerciseById(Guid Id);
         void CreateExercise(Exercise exercise);
+        void DeleteExercise(Exercise exercise);
         List<SelectListItem> ShowPartOfBodyToSelect();
+
     }
 }

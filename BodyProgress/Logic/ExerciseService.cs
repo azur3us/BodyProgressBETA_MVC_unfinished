@@ -23,6 +23,17 @@ namespace BodyProgress.Logic
             _context.SaveChanges();
         }
 
+        public void DeleteExercise(Exercise exercise)
+        {
+            _context.Exercises.Remove(exercise);
+            _context.SaveChanges();
+        }
+
+        public Exercise TakeExerciseById(Guid Id)
+        {
+            return _context.Exercises.FirstOrDefault(x => x.Id == Id);
+        }
+
         public List<Exercise> ReturnAllExercises()
         {
             return _context.Exercises.Include(x => x.PartOfBody).ToList();
@@ -32,5 +43,6 @@ namespace BodyProgress.Logic
         {
             return _context.PartOfBodies.Select(a => new SelectListItem() { Value = a.Id.ToString(), Text = a.Name }).ToList();
         }
+
     }
 }

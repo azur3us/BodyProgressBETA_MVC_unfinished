@@ -49,6 +49,27 @@ namespace BodyProgress.Controlles
         }
 
         [HttpGet]
+        public IActionResult DeleteExercise(Guid Id)
+        {           
+            var exercise = _exerciseService.TakeExerciseById(Id);
+            if(exercise == null)
+            {
+                return NotFound();
+            }
+
+            return View(exercise);
+        }
+
+        [HttpPost,ActionName("DeleteExercise")]
+        public IActionResult DeleteConfirmed(Guid Id)
+        {
+            var exercise = _exerciseService.TakeExerciseById(Id);
+            _exerciseService.DeleteExercise(exercise);
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
         public IActionResult ShowAllExercises()
         {
             var exercises = _exerciseService.ReturnAllExercises().OrderBy(x => x.Name);
