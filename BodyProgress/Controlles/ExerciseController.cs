@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BodyProgress.Logic;
+﻿using BodyProgress.Logic;
 using BodyProgress.Models;
 using BodyProgress.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Linq;
 
 namespace BodyProgress.Controlles
 {
@@ -50,9 +46,9 @@ namespace BodyProgress.Controlles
 
         [HttpGet]
         public IActionResult DeleteExercise(Guid Id)
-        {           
+        {
             var exercise = _exerciseService.TakeExerciseById(Id);
-            if(exercise == null)
+            if (exercise == null)
             {
                 return NotFound();
             }
@@ -60,7 +56,7 @@ namespace BodyProgress.Controlles
             return View(exercise);
         }
 
-        [HttpPost,ActionName("DeleteExercise")]
+        [HttpPost, ActionName("DeleteExercise")]
         public IActionResult DeleteConfirmed(Guid Id)
         {
             var exercise = _exerciseService.TakeExerciseById(Id);
@@ -80,8 +76,9 @@ namespace BodyProgress.Controlles
         [HttpPost]
         public IActionResult EditExercise(Exercise exercise)
         {
-            
+
             _exerciseService.EditExercise(exercise);
+
             return RedirectToAction("ShowAllExercises", "Exercise");
 
         }
