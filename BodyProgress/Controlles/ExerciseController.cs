@@ -70,6 +70,23 @@ namespace BodyProgress.Controlles
         }
 
         [HttpGet]
+        public IActionResult EditExercise(Guid Id)
+        {
+            var exercise = _exerciseService.TakeExerciseById(Id);
+
+            return View(exercise);
+        }
+
+        [HttpPost]
+        public IActionResult EditExercise(Exercise exercise)
+        {
+            
+            _exerciseService.EditExercise(exercise);
+            return RedirectToAction("ShowAllExercises", "Exercise");
+
+        }
+
+        [HttpGet]
         public IActionResult ShowAllExercises()
         {
             var exercises = _exerciseService.ReturnAllExercises().OrderBy(x => x.Name);

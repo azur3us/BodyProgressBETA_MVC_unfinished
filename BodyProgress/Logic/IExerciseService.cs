@@ -13,6 +13,7 @@ namespace BodyProgress.Logic
         Exercise TakeExerciseById(Guid Id);
         void CreateExercise(Exercise exercise);
         void DeleteExercise(Exercise exercise);
+        void EditExercise(Exercise exercise);
         List<SelectListItem> ShowPartOfBodyToSelect();
 
     }

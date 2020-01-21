@@ -1,8 +1,9 @@
 ﻿@model ExerciseViewModel
 
 
-@foreach(var exercise in Model.Exercises)
+@foreach (var exercise in Model.Exercises)
 {
     <h4>@exercise.Name @exercise.PartOfBody.Name</h4>
     <a asp-action="DeleteExercise" asp-controller="Exercise" asp-route-Id="@exercise.Id">Usuń</a>
+    <a asp-action="EditExercise" asp-controller="Exercise" asp-route-Id="@exercise.Id">Edytuj</a>
 }

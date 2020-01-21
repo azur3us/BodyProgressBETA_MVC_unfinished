@@ -1,0 +1,16 @@
+﻿@model BodyProgress.Models.Exercise
+
+<h1>@Model.Name</h1>
+
+<div>
+    <form asp-action="EditExercise">
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <input asp-for="Name" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Edytuj" class="btn btn-success" />
+        </div>
+    </form>
+
+</div>

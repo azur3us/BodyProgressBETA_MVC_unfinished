@@ -29,6 +29,13 @@ namespace BodyProgress.Logic
             _context.SaveChanges();
         }
 
+        public void EditExercise(Exercise exercise)
+        {
+            _context.Attach(exercise);
+            _context.Entry(exercise).Property("Name").IsModified = true;
+            _context.SaveChanges();
+        }
+
         public Exercise TakeExerciseById(Guid Id)
         {
             return _context.Exercises.FirstOrDefault(x => x.Id == Id);
