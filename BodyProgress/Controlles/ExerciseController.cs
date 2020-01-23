@@ -29,7 +29,7 @@ namespace BodyProgress.Controlles
         [Authorize(Roles = "Admin")]
         public IActionResult AddExercise(ExerciseViewModel model)
         {
-            var exerciseViewModel = new Exercise()
+            var exercise = new Exercise()
             {
                 Name = model.Name,
                 PartOfBodyId = model.PartOfBodyId
@@ -37,7 +37,7 @@ namespace BodyProgress.Controlles
 
             if (ModelState.IsValid)
             {
-                _exerciseService.CreateExercise(exerciseViewModel);
+                _exerciseService.CreateExercise(exercise);
                 return RedirectToAction("AddExercise");
             }
 
@@ -53,7 +53,13 @@ namespace BodyProgress.Controlles
                 return NotFound();
             }
 
-            return View(exercise);
+            var exerciseViewModel = new DeleteExerciseViewModel()
+            {
+                Id = exercise.Id,
+                Name = exercise.Name
+            };
+
+            return View(exerciseViewModel);
         }
 
         [HttpPost, ActionName("DeleteExercise")]
@@ -62,21 +68,32 @@ namespace BodyProgress.Controlles
             var exercise = _exerciseService.TakeExerciseById(Id);
             _exerciseService.DeleteExercise(exercise);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("ShowAllExercises", "Exercise");
         }
 
         [HttpGet]
         public IActionResult EditExercise(Guid Id)
         {
+
             var exercise = _exerciseService.TakeExerciseById(Id);
 
-            return View(exercise);
+            var exerciseViewModel = new EditExerciseViewModel()
+            {
+                Id = exercise.Id,
+                Name = exercise.Name
+            };
+
+            return View(exerciseViewModel);
         }
 
         [HttpPost]
-        public IActionResult EditExercise(Exercise exercise)
+        public IActionResult EditExercise(EditExerciseViewModel model)
         {
-
+            var exercise = new Exercise()
+            {
+                Id = model.Id,
+                Name = model.Name
+            };
             _exerciseService.EditExercise(exercise);
 
             return RedirectToAction("ShowAllExercises", "Exercise");
@@ -86,7 +103,7 @@ namespace BodyProgress.Controlles
         [HttpGet]
         public IActionResult ShowAllExercises()
         {
-            var exercises = _exerciseService.ReturnAllExercises().OrderBy(x => x.Name);
+            var exercises = _exerciseService.ReturnAllExercises().OrderBy(x => x.PartOfBody.Name);
 
             var exerciseViewModel = new ExerciseViewModel()
             {
