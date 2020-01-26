@@ -4,14 +4,16 @@ using BodyProgress.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BodyProgress.Migrations
 {
     [DbContext(typeof(BodyProgressDbContext))]
-    partial class BodyProgressDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200123131342_TreningPlanTableAdded")]
+    partial class TreningPlanTableAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,7 +55,7 @@ namespace BodyProgress.Migrations
                     b.ToTable("PartOfBodies");
                 });
 
-            modelBuilder.Entity("BodyProgress.Models.TrainingPlan", b =>
+            modelBuilder.Entity("BodyProgress.Models.TreningPlan", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -69,7 +71,7 @@ namespace BodyProgress.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("TrainingPlans");
+                    b.ToTable("TreningPlans");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -277,7 +279,7 @@ namespace BodyProgress.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BodyProgress.Models.TrainingPlan", b =>
+            modelBuilder.Entity("BodyProgress.Models.TreningPlan", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()

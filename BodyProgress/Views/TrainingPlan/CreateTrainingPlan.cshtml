@@ -1,0 +1,12 @@
+﻿@model CreateTrainingPlanViewModel
+
+<h1>CreateTrainingPlan FOR @Model.UserName</h1>
+
+<div>
+    <form asp-action="CreateTrainingPlan" method="post">
+        <input type="hidden" asp-for="CreatorId"/>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

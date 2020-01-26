@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BodyProgress.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,15 +47,15 @@ namespace BodyProgress.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Exercises",
+                name: "PartOfBodies",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false, defaultValueSql: "NEWID()"),
+                    Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Exercises", x => x.Id);
+                    table.PrimaryKey("PK_PartOfBodies", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -164,6 +164,25 @@ namespace BodyProgress.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Exercises",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false, defaultValueSql: "NEWID()"),
+                    Name = table.Column<string>(nullable: true),
+                    PartOfBodyId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Exercises", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Exercises_PartOfBodies_PartOfBodyId",
+                        column: x => x.PartOfBodyId,
+                        principalTable: "PartOfBodies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -202,6 +221,11 @@ namespace BodyProgress.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Exercises_PartOfBodyId",
+                table: "Exercises",
+                column: "PartOfBodyId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -229,6 +253,9 @@ namespace BodyProgress.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "PartOfBodies");
         }
     }
 }

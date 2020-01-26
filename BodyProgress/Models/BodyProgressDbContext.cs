@@ -19,5 +19,6 @@ namespace BodyProgress.Models
 
         public DbSet<Exercise> Exercises { get; set; }  
         public DbSet<PartOfBody> PartOfBodies { get; set; }
+        public DbSet<TrainingPlan> TrainingPlans { get; set; }
     }
 }

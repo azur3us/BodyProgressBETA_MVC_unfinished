@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BodyProgress.Migrations
 {
     [DbContext(typeof(BodyProgressDbContext))]
-    [Migration("20200119222058_UpdataExerciseModel")]
-    partial class UpdataExerciseModel
+    [Migration("20200126120419_EditTreningPlanToTrainingPlan")]
+    partial class EditTreningPlanToTrainingPlan
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,6 +53,25 @@ namespace BodyProgress.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PartOfBodies");
+                });
+
+            modelBuilder.Entity("BodyProgress.Models.TrainingPlan", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("TrainingPlans");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -258,6 +277,13 @@ namespace BodyProgress.Migrations
                         .HasForeignKey("PartOfBodyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BodyProgress.Models.TrainingPlan", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -26,6 +26,7 @@ namespace BodyProgress
 
             services.AddTransient<IExerciseService, ExerciseService>();
             services.AddTransient<IPartOfBodyService, PartOfBodyService>();
+            services.AddTransient<ITrainingPlanService, TrainingPlanService>();
             services.AddMvc()
                 .AddRazorRuntimeCompilation()
                 .AddFluentValidation(mvcConfiguration => mvcConfiguration.RegisterValidatorsFromAssemblyContaining<Startup>());

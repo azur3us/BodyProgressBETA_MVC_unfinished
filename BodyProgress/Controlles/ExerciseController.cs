@@ -26,7 +26,7 @@ namespace BodyProgress.Controlles
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult AddExercise(ExerciseViewModel model)
         {
             var exercise = new Exercise()

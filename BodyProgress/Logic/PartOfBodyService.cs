@@ -12,7 +12,7 @@ namespace BodyProgress.Logic
 
         public PartOfBodyService(BodyProgressDbContext context)
         {
-            this._context = context;
+            _context = context;
         }
 
         public void AddParfOfBody(PartOfBody partOfBody)

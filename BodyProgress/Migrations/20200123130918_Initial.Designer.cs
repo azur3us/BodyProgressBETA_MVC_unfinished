@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BodyProgress.Migrations
 {
     [DbContext(typeof(BodyProgressDbContext))]
-    [Migration("20191120130233_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20200123130918_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,9 +31,28 @@ namespace BodyProgress.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("PartOfBodyId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("PartOfBodyId");
+
                     b.ToTable("Exercises");
+                });
+
+            modelBuilder.Entity("BodyProgress.Models.PartOfBody", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PartOfBodies");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -230,6 +249,15 @@ namespace BodyProgress.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("BodyProgress.Models.Exercise", b =>
+                {
+                    b.HasOne("BodyProgress.Models.PartOfBody", "PartOfBody")
+                        .WithMany()
+                        .HasForeignKey("PartOfBodyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

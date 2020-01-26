@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BodyProgress.Migrations
 {
     [DbContext(typeof(BodyProgressDbContext))]
-    [Migration("20200118175534_AddPartOfBodyTable")]
-    partial class AddPartOfBodyTable
+    [Migration("20200126193112_AddUserIdInStringTypeToTrainingPlanTable")]
+    partial class AddUserIdInStringTypeToTrainingPlanTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,7 +31,7 @@ namespace BodyProgress.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("PartOfBodyId")
+                    b.Property<Guid>("PartOfBodyId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -53,6 +53,25 @@ namespace BodyProgress.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PartOfBodies");
+                });
+
+            modelBuilder.Entity("BodyProgress.Models.TrainingPlan", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("TrainingPlans");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -255,7 +274,16 @@ namespace BodyProgress.Migrations
                 {
                     b.HasOne("BodyProgress.Models.PartOfBody", "PartOfBody")
                         .WithMany()
-                        .HasForeignKey("PartOfBodyId");
+                        .HasForeignKey("PartOfBodyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("BodyProgress.Models.TrainingPlan", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
