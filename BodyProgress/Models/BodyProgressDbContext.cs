@@ -15,10 +15,13 @@ namespace BodyProgress.Models
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Exercise>().Property(e => e.Id).HasDefaultValueSql("NEWID()");
+            modelBuilder.Entity<PlanItemExercise>().HasKey(pe => new { pe.ExerciseId, pe.PlanItemId });
         }
 
         public DbSet<Exercise> Exercises { get; set; }  
         public DbSet<PartOfBody> PartOfBodies { get; set; }
         public DbSet<TrainingPlan> TrainingPlans { get; set; }
+        public DbSet<PlanItem> PlanItems { get; set; }
+        public DbSet<PlanItemExercise> PlanItemExercises { get; set; }
     }
 }
