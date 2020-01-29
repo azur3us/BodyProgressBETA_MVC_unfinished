@@ -59,10 +59,13 @@ namespace BodyProgress.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("ExerciseId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Reps")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("TrainingPlanId")
+                    b.Property<Guid>("TrainingPlanId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Weight")
@@ -70,24 +73,11 @@ namespace BodyProgress.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ExerciseId");
+
                     b.HasIndex("TrainingPlanId");
 
                     b.ToTable("PlanItems");
-                });
-
-            modelBuilder.Entity("BodyProgress.Models.PlanItemExercise", b =>
-                {
-                    b.Property<Guid>("ExerciseId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("PlanItemId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("ExerciseId", "PlanItemId");
-
-                    b.HasIndex("PlanItemId");
-
-                    b.ToTable("PlanItemExercises");
                 });
 
             modelBuilder.Entity("BodyProgress.Models.TrainingPlan", b =>
@@ -316,22 +306,15 @@ namespace BodyProgress.Migrations
 
             modelBuilder.Entity("BodyProgress.Models.PlanItem", b =>
                 {
-                    b.HasOne("BodyProgress.Models.TrainingPlan", "TrainingPlan")
-                        .WithMany()
-                        .HasForeignKey("TrainingPlanId");
-                });
-
-            modelBuilder.Entity("BodyProgress.Models.PlanItemExercise", b =>
-                {
                     b.HasOne("BodyProgress.Models.Exercise", "Exercise")
-                        .WithMany("PlanItemExercises")
+                        .WithMany()
                         .HasForeignKey("ExerciseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BodyProgress.Models.PlanItem", "PlanItem")
-                        .WithMany("PlanItemExercises")
-                        .HasForeignKey("PlanItemId")
+                    b.HasOne("BodyProgress.Models.TrainingPlan", "TrainingPlan")
+                        .WithMany("PlanItems")
+                        .HasForeignKey("TrainingPlanId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

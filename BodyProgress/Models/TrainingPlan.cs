@@ -15,6 +15,8 @@ namespace BodyProgress.Models
         public DateTime CreatedDate { get; set; }
 
         public string UserId { get; set; }
-        public IdentityUser User { get; set; } 
+        public IdentityUser User { get; set; }
+
+        public List<PlanItem> PlanItems { get; set; }
     }
 }

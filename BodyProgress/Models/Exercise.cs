@@ -19,8 +19,6 @@ namespace BodyProgress.Models
         public Guid PartOfBodyId { get; set; }
         public PartOfBody PartOfBody { get; set; }
 
-        public List<PlanItemExercise> PlanItemExercises { get; set; }
-
         public Exercise()
         {
             this.Id = System.Guid.NewGuid();

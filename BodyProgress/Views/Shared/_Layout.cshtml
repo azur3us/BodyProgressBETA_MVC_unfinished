@@ -9,6 +9,7 @@
     <link href="~/content/login.css" rel="stylesheet" />
     <link href="~/content/site.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
     <div class="content">
@@ -25,14 +26,9 @@
                     <li class="nav-item">
                         <a asp-action="ShowAllExercises" asp-controller="Exercise" class="nav-link">Pokaż ćwiczenia</a>
                     </li>
-                    <ul class="navbar-nav ml-auto">
-                        <li>
-                            <a asp-action="Register" asp-controller="Account" class="nav-link">Rejestracja</a>
-                        </li>
-                        <li>
-                            <a asp-action="Login" asp-controller="Account" class="nav-link">Zaloguj</a>
-                        </li>
-                    </ul>
+                    <li class="nav-item">
+                        <a asp-action="CreateTrainingPlan" asp-controller="TrainingPlan" class="nav-link">Stwórz plan</a>
+                    </li>
                 </ul>
                 @if (SignInManager.IsSignedIn(User))
                 {
@@ -42,6 +38,17 @@
 
                         </ul>
                     </form>
+                }
+                else
+                {
+                    <ul class="navbar-nav ml-auto">
+                        <li>
+                            <a asp-action="Register" asp-controller="Account" class="nav-link">Rejestracja</a>
+                        </li>
+                        <li>
+                            <a asp-action="Login" asp-controller="Account" class="nav-link">Zaloguj</a>
+                        </li>
+                    </ul>
                 }
             </div>
         </nav>
@@ -54,6 +61,7 @@
             <span class="d-flex justify-content-center pt-3">&copy; 2020 BodyProgress, by azure3us</span>
         </div>
     </footer>
+   
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </body>
 </html>

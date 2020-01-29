@@ -1,4 +1,7 @@
 ﻿using BodyProgress.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BodyProgress.Logic
 {
@@ -16,6 +19,11 @@ namespace BodyProgress.Logic
         {
             _context.TrainingPlans.Add(traningPlan);
             _context.SaveChanges();
+        }
+
+        public List<SelectListItem> ShowAllExerciseInSelectList()
+        {
+            return _context.Exercises.Select(e => new SelectListItem() { Value = e.Id.ToString(), Text = e.Name }).ToList();
         }
     }
 }

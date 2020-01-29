@@ -31,12 +31,13 @@ namespace BodyProgress.Controlles
 
             var createTrainingPlanViewMode = new CreateTrainingPlanViewModel()
             {
-
+                ExercisesSelectList = _trainingPlanService.ShowAllExerciseInSelectList(),
                 CreatorId = User.FindFirstValue(ClaimTypes.NameIdentifier),
-                UserName = User.FindFirstValue(ClaimTypes.Name)
+                UserName = User.FindFirstValue(ClaimTypes.Name),
+
 
             };
-             
+
             return View(createTrainingPlanViewMode);
         }
 
@@ -46,12 +47,18 @@ namespace BodyProgress.Controlles
             var newTrainingPlan = new TrainingPlan()
             {
                 UserId = model.CreatorId,
-                CreatedDate = DateTime.Now
+                CreatedDate = DateTime.Now,
+                PlanItems = model.PlanItems.Select(x => new PlanItem()
+                {
+                    ExerciseId = x.ExerciseId,
+                    Reps = x.Reps,
+                    Weight = x.Weight
+                }).ToList()
             };
 
             _trainingPlanService.AddTrainingPlan(newTrainingPlan);
 
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

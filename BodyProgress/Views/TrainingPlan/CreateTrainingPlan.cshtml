@@ -2,11 +2,53 @@
 
 <h1>CreateTrainingPlan FOR @Model.UserName</h1>
 
-<div>
+<div id="create-training">
     <form asp-action="CreateTrainingPlan" method="post">
-        <input type="hidden" asp-for="CreatorId"/>
+        <input type="hidden" asp-for="CreatorId" />
+        <pre>{{planItems}}</pre>
+        <div>
+            <div v-for="(planItem, index) in planItems">
+                <select asp-items="@Model.ExercisesSelectList" v-model="planItem.exerciseId" :name="`PlanItems[${index}].ExerciseId`"></select>
+                <input type="number" v-model="planItem.weight" :name="`PlanItems[${index}].Weight`"/>
+                <input  type="number" v-model="planItem.reps" :name="`PlanItems[${index}].Reps`"/>
+            </div>
+            <button v-on:click.prevent="addNext">Add next </button>
+        </div>
+        @*<div class="form-group">
+                <label asp-for="ExercisesSelectList">Wybierz Ćwiczenie</label>
+                <select asp-for="ExerciseId" asp-items="@Model.ExercisesSelectList"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Weight">Ciężar</label>
+                <input asp-for="Weight" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Reps">Ilość powtórzeń</label>
+                <input asp-for="Reps" />
+            </div>*@
         <div class="form-group">
             <input type="submit" value="Create" class="btn btn-primary" />
         </div>
     </form>
 </div>
+
+<script>
+    const newItem = () => ({
+        exerciseId: null,
+        weight: 0,
+        reps: 0
+    });
+    new Vue({
+        el: '#create-training',
+        data() {
+            return {
+                planItems: [newItem()]
+            }
+        },
+        methods: {
+            addNext() {
+                this.planItems.push(newItem())
+            }
+        }
+    })
+</script>
