@@ -66,7 +66,7 @@ namespace BodyProgress.Controlles
         public IActionResult ShowAllCreatedTrainingPlan()
         {
             var trainingPlans = _trainingPlanService.ReturnAllCreatedTrainingPlans(User.FindFirstValue(ClaimTypes.NameIdentifier));
-
+                
             var showAllCreatedTrainingPlanViewModel = new ShowAllCreatedTrainingPlanViewModel()
             {
                 TrainingPlans = trainingPlans
@@ -78,7 +78,16 @@ namespace BodyProgress.Controlles
         [HttpGet]
         public IActionResult TrainingPlanDetails(Guid trainingPlanId)
         {
-            return View();
+            var trainingId = _trainingPlanService.TakeTrainingPlanById(trainingPlanId);
+            var planItemList = _trainingPlanService.ShowPlanItemsBelongingToTrainingPlan(trainingPlanId);
+
+            var trainingPlanDetailsViewModel = new TrainingPlanDetailsViewModel()
+            {
+                PlanId = trainingId.Id,
+                PlanItems = planItemList                
+            };
+
+            return View(trainingPlanDetailsViewModel);
         }
     }
 }

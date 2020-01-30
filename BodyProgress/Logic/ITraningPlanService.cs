@@ -11,5 +11,7 @@ namespace BodyProgress.Logic
         void AddTrainingPlan(TrainingPlan traningPlan, List<PlanItem> planItems);
         List<SelectListItem> ShowAllExerciseInSelectList();
         List<TrainingPlan> ReturnAllCreatedTrainingPlans(string creatorId);
+        TrainingPlan TakeTrainingPlanById(Guid Id);
+        List<PlanItem> ShowPlanItemsBelongingToTrainingPlan(Guid PlanId);
     }
 }

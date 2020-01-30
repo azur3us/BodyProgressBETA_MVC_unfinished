@@ -1,7 +1,10 @@
 ﻿using BodyProgress.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace BodyProgress.Logic
 {
@@ -29,7 +32,17 @@ namespace BodyProgress.Logic
 
         public List<TrainingPlan> ReturnAllCreatedTrainingPlans(string creatorId)
         {
-            return _context.TrainingPlans.Where(x => x.UserId == creatorId).ToList();
+            return _context.TrainingPlans.Where(x => x.UserId == creatorId).OrderByDescending(x => x.CreatedDate).ToList();
+        }
+
+        public TrainingPlan TakeTrainingPlanById(Guid Id)
+        {
+            return _context.TrainingPlans.FirstOrDefault(x => x.Id == Id);
+        }
+
+        public List<PlanItem> ShowPlanItemsBelongingToTrainingPlan(Guid PlanId)
+        {
+            return _context.PlanItems.Include(x => x.Exercise).Where(x => x.TrainingPlanId == PlanId).ToList();
         }
     }
 }
