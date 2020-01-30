@@ -60,5 +60,18 @@ namespace BodyProgress.Controlles
 
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpGet]
+        public IActionResult ShowAllCreatedTrainingPlan()
+        {
+            var trainingPlans = _trainingPlanService.ReturnAllCreatedTrainingPlans(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            var showAllCreatedTrainingPlanViewModel = new ShowAllCreatedTrainingPlanViewModel()
+            {
+                TrainingPlans = trainingPlans
+            };
+          
+            return View(showAllCreatedTrainingPlanViewModel);
+        }
     }
 }

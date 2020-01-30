@@ -10,5 +10,6 @@ namespace BodyProgress.Logic
     {
         void AddTrainingPlan(TrainingPlan traningPlan);
         List<SelectListItem> ShowAllExerciseInSelectList();
+        List<TrainingPlan> ReturnAllCreatedTrainingPlans(string creatorId);
     }
 }

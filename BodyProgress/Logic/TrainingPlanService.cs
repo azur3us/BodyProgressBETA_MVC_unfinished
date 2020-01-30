@@ -25,5 +25,10 @@ namespace BodyProgress.Logic
         {
             return _context.Exercises.Select(e => new SelectListItem() { Value = e.Id.ToString(), Text = e.Name }).ToList();
         }
+
+        public List<TrainingPlan> ReturnAllCreatedTrainingPlans(string creatorId)
+        {
+            return _context.TrainingPlans.Where(x => x.UserId == creatorId).ToList();
+        }
     }
 }

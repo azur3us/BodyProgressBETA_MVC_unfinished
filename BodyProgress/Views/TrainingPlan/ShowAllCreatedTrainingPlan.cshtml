@@ -1,0 +1,8 @@
+﻿@model ShowAllCreatedTrainingPlanViewModel
+
+<h1>Twoje plany trningowe</h1>
+
+@foreach(var plan in Model.TrainingPlans)
+{
+    <h2>@plan.CreatedDate</h2>
+}

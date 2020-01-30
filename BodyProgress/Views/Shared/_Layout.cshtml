@@ -29,10 +29,13 @@
                     <li class="nav-item">
                         <a asp-action="CreateTrainingPlan" asp-controller="TrainingPlan" class="nav-link">Stwórz plan</a>
                     </li>
+                    <li class="nav-item">
+                        <a asp-action="ShowAllCreatedTrainingPlan" asp-controller="TrainingPlan" class="nav-link">Pokaż moje plany treningowe</a>
+                    </li>
                 </ul>
                 @if (SignInManager.IsSignedIn(User))
                 {
-                    <form asp-controller="Account" asp-action="Logout" id="logoutForm" method="post">
+                    <form asp-controller="Account" asp-action="Logout" id="logoutForm" method="post" class="ml-auto">
                         <ul class="m-0 p-0">
                             <li class="nav-link text-warning">@User.Identity.Name <a class="text-decoration-none" href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a></li>
 
@@ -62,6 +65,5 @@
         </div>
     </footer>
    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </body>
 </html>
