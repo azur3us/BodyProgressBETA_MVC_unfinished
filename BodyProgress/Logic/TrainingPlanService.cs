@@ -15,9 +15,10 @@ namespace BodyProgress.Logic
             _context = context;
         }
 
-        public void AddTrainingPlan(TrainingPlan traningPlan)
+        public void AddTrainingPlan(TrainingPlan traningPlan, List<PlanItem> planItems)
         {
             _context.TrainingPlans.Add(traningPlan);
+            _context.AddRange(planItems);
             _context.SaveChanges();
         }
 

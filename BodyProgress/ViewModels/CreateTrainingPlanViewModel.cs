@@ -12,6 +12,7 @@ namespace BodyProgress.ViewModels
     {
         public Guid TraningPlanId { get; set; }
         public DateTime CratedDate { get; set; }
+        public string TrainingPlanName { get; set; }
         public string CreatorId { get; set; }
         public string UserName { get; set; }
 

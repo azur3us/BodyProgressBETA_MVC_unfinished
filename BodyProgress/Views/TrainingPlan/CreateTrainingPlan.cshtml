@@ -6,6 +6,10 @@
     <form asp-action="CreateTrainingPlan" method="post">
         <input type="hidden" asp-for="CreatorId" />
         <div>
+            <label asp-for="TrainingPlanName">Nazwa planu</label>
+            <input asp-for="TrainingPlanName"/>
+        </div>
+        <div>
             <div v-for="(planItem, index) in planItems">
                 <select asp-items="@Model.ExercisesSelectList" v-model="planItem.exerciseId" :name="`PlanItems[${index}].ExerciseId`"></select>
                 <input type="number" v-model="planItem.weight" :name="`PlanItems[${index}].Weight`"/>

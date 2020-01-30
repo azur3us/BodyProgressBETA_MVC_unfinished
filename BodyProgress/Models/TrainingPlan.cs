@@ -10,6 +10,7 @@ namespace BodyProgress.Models
     public class TrainingPlan
     {
         public Guid Id { get; set; }
+        public string TrainingPlanName { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString ="{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime CreatedDate { get; set; }

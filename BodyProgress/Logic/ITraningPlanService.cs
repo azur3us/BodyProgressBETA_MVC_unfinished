@@ -8,7 +8,7 @@ namespace BodyProgress.Logic
 {
     public interface ITrainingPlanService
     {
-        void AddTrainingPlan(TrainingPlan traningPlan);
+        void AddTrainingPlan(TrainingPlan traningPlan, List<PlanItem> planItems);
         List<SelectListItem> ShowAllExerciseInSelectList();
         List<TrainingPlan> ReturnAllCreatedTrainingPlans(string creatorId);
     }

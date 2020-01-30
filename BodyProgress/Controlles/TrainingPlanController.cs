@@ -48,6 +48,7 @@ namespace BodyProgress.Controlles
             {
                 UserId = model.CreatorId,
                 CreatedDate = DateTime.Now,
+                TrainingPlanName = model.TrainingPlanName,
                 PlanItems = model.PlanItems.Select(x => new PlanItem()
                 {
                     ExerciseId = x.ExerciseId,
@@ -56,7 +57,7 @@ namespace BodyProgress.Controlles
                 }).ToList()
             };
 
-            _trainingPlanService.AddTrainingPlan(newTrainingPlan);
+            _trainingPlanService.AddTrainingPlan(newTrainingPlan, newTrainingPlan.PlanItems);
 
             return RedirectToAction("Index", "Home");
         }
@@ -72,6 +73,12 @@ namespace BodyProgress.Controlles
             };
           
             return View(showAllCreatedTrainingPlanViewModel);
+        }
+
+        [HttpGet]
+        public IActionResult TrainingPlanDetails(Guid trainingPlanId)
+        {
+            return View();
         }
     }
 }
