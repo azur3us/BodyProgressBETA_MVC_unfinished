@@ -1,12 +1,22 @@
 ﻿@model LoginViewModel
 
-<div class="sidenav">
-    <div class="login-main-text">
-        <h2>Okno rejestracji <a asp-action="Index" asp-controller="Home" class="text-decoration-none">BodyProgress</a></h2>
-        <h4>Aby korzystać z aplikacji musisz posiadać konto.</h4>
-        <p>Jeśli masz już konto kliknij -> <a asp-action="Login" asp-controller="Account">ZALOGUJ</a></p>
+
+@{
+    Layout = "~/Views/Shared/LayoutForAccount.cshtml";
+}
+
+    <div class="sidenav">
+        <div class="login-main-text">
+            <h2>Okno rejestracji <a asp-action="Index" asp-controller="Home" class="text-decoration-none">BodyProgress</a></h2>
+            <h4>Aby korzystać z aplikacji musisz posiadać konto.</h4>
+            <p>Jeśli masz już konto kliknij -> <a class="text-decoration-none" asp-action="Login" asp-controller="Account">ZALOGUJ</a></p>
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <span class="d-flex justify-content-center pt-3">&copy; 2020 BodyProgress, by azure3us</span>
+            </div>
+        </footer>
     </div>
-</div>
 <div class="main">
     <div class="col-md-6 col-sm-12">
         <div class="login-form">
