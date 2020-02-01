@@ -34,8 +34,6 @@ namespace BodyProgress.Controlles
                 ExercisesSelectList = _trainingPlanService.ShowAllExerciseInSelectList(),
                 CreatorId = User.FindFirstValue(ClaimTypes.NameIdentifier),
                 UserName = User.FindFirstValue(ClaimTypes.Name),
-
-
             };
 
             return View(createTrainingPlanViewMode);
@@ -84,6 +82,7 @@ namespace BodyProgress.Controlles
             var trainingPlanDetailsViewModel = new TrainingPlanDetailsViewModel()
             {
                 PlanId = trainingId.Id,
+                TrainingPlanName = trainingId.TrainingPlanName,
                 PlanItems = planItemList                
             };
 

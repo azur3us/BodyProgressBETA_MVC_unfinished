@@ -27,7 +27,7 @@ namespace BodyProgress.Logic
 
         public List<SelectListItem> ShowAllExerciseInSelectList()
         {
-            return _context.Exercises.Select(e => new SelectListItem() { Value = e.Id.ToString(), Text = e.Name }).ToList();
+            return _context.Exercises.Select(e => new SelectListItem() { Value = e.Id.ToString(), Text = e.Name }).OrderBy(x => x.Text).ToList();
         }
 
         public List<TrainingPlan> ReturnAllCreatedTrainingPlans(string creatorId)
