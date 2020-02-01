@@ -1,9 +1,31 @@
 ﻿@model TrainingPlanDetailsViewModel
 
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th>Ćwiczenie</th>
+            <th>Obciążenie (kg)</th>
+            <th>Ilość powtórzeń</th>
+        </tr>
+    </thead>
+    @foreach (var planItems in Model.PlanItems)
+    {
+        <tbody>
+            <tr>
+                <td>@planItems.Exercise.Name</td>
+                @if (planItems.Weight == 0)
+                {
+                    <td>Brak obciążenia</td>
+                }
+                else
+                {
+                    <td>@planItems.Weight</td>
+                }
+                <td>@planItems.Reps</td>
+            </tr>
 
-@foreach(var planItems in Model.PlanItems)
-{
-    <h1>@planItems.Exercise.Name</h1>
-    <h2>@planItems.Weight</h2>
-    <h2>@planItems.Reps</h2>
-}
+        </tbody>
+    }
+</table>
+
+

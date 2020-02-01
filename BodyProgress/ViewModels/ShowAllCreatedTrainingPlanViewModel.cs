@@ -10,5 +10,6 @@ namespace BodyProgress.ViewModels
     {
         //public Guid TrainingPlanId { get; set; }
         public List<TrainingPlan> TrainingPlans;
+        public int Counter { get; set; } = 1;
     }
 }

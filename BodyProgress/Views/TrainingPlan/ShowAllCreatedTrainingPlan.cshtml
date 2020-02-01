@@ -1,8 +1,24 @@
 ﻿@model ShowAllCreatedTrainingPlanViewModel
 
 <h1>Twoje plany trningowe</h1>
+<table class="table table-hover table-dark">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nazwa planu</th>
+            <th scope="col">Data utworzenia</th>
+        </tr>
+    </thead>
+    @foreach (var plan in Model.TrainingPlans)
+    {
+        <tbody>
+            <tr>
+                <th scope="row">@((@Model.Counter)++)</th>
+                <td><a class="my-link" asp-action="TrainingPlanDetails" asp-controller="TrainingPlan" asp-route-TrainingPlanId="@plan.Id">@plan.TrainingPlanName</a></td>
+                <td>@plan.CreatedDate</td>
+            </tr>
+        </tbody>
+    }
+</table>
 
-@foreach(var plan in Model.TrainingPlans)
-{
-<a asp-action="TrainingPlanDetails" asp-controller="TrainingPlan" asp-route-TrainingPlanId="@plan.Id"><h2>@plan.TrainingPlanName</h2> <h2>@plan.CreatedDate</h2></a> 
-} 
+
