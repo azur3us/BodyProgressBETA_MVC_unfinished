@@ -65,10 +65,10 @@ namespace BodyProgress.Controlles
         public IActionResult ShowAllCreatedTrainingPlan()
         {
             var trainingPlans = _trainingPlanService.ReturnAllCreatedTrainingPlans(User.FindFirstValue(ClaimTypes.NameIdentifier));
-                
+
             var showAllCreatedTrainingPlanViewModel = new ShowAllCreatedTrainingPlanViewModel()
             {
-                TrainingPlans = trainingPlans
+                TrainingPlans = trainingPlans,
             };
           
             return View(showAllCreatedTrainingPlanViewModel);
@@ -90,20 +90,8 @@ namespace BodyProgress.Controlles
             return View(trainingPlanDetailsViewModel);
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult DeleteTrainingPlan(Guid Id)
-        {
-            var trainingPlan = _trainingPlanService.TakeTrainingPlanById(Id);
-
-            var trainingPlanViewModel = new ShowAllCreatedTrainingPlanViewModel()
-            {
-                PlanId = trainingPlan.Id
-            };
-            return View(trainingPlanViewModel);
-        }
-        
-        [HttpPost,ActionName("DeleteTrainingPlan")]
-        public IActionResult ConfirmeDeleteTrainingPlan(Guid Id)
         {
             var trainingPlan = _trainingPlanService.TakeTrainingPlanById(Id);
             _trainingPlanService.RemoveTrainingPlan(trainingPlan);
