@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using BodyProgress.Logic;
 using BodyProgress.Models;
@@ -87,6 +88,27 @@ namespace BodyProgress.Controlles
             };
 
             return View(trainingPlanDetailsViewModel);
+        }
+
+        [HttpGet]
+        public IActionResult DeleteTrainingPlan(Guid Id)
+        {
+            var trainingPlan = _trainingPlanService.TakeTrainingPlanById(Id);
+
+            var trainingPlanViewModel = new ShowAllCreatedTrainingPlanViewModel()
+            {
+                PlanId = trainingPlan.Id
+            };
+            return View(trainingPlanViewModel);
+        }
+        
+        [HttpPost,ActionName("DeleteTrainingPlan")]
+        public IActionResult ConfirmeDeleteTrainingPlan(Guid Id)
+        {
+            var trainingPlan = _trainingPlanService.TakeTrainingPlanById(Id);
+            _trainingPlanService.RemoveTrainingPlan(trainingPlan);
+
+            return RedirectToAction("ShowAllCreatedTrainingPlan","TrainingPlan");
         }
     }
 }

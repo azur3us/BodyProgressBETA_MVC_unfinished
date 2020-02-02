@@ -8,6 +8,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Nazwa planu</th>
                 <th scope="col">Data utworzenia</th>
+                <th scope="col">Opcje</th>
             </tr>
         </thead>
         @foreach (var plan in Model.TrainingPlans)
@@ -17,6 +18,15 @@
                     <th scope="row">@((@Model.Counter)++)</th>
                     <td><a class="my-link" asp-action="TrainingPlanDetails" asp-controller="TrainingPlan" asp-route-TrainingPlanId="@plan.Id">@plan.TrainingPlanName</a></td>
                     <td>@plan.CreatedDate</td>
+                    <td>
+                        <a asp-action="DeleteTrainingPlan" asp-controller="TrainingPlan" asp-route-Id="@plan.Id">
+                            @*<form asp-action="DeleteTrainingPlan">
+                                <input type="hidden" asp-for="PlanId" />
+                                <input type="submit" value="Usuń" class="btn btn-danger" />
+                            </form>*@
+                            Usuń
+                        </a>
+                    </td>
                 </tr>
             </tbody>
         }

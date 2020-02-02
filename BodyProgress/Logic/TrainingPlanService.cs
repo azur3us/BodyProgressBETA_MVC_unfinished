@@ -18,13 +18,6 @@ namespace BodyProgress.Logic
             _context = context;
         }
 
-        public void AddTrainingPlan(TrainingPlan traningPlan, List<PlanItem> planItems)
-        {
-            _context.TrainingPlans.Add(traningPlan);
-            _context.AddRange(planItems);
-            _context.SaveChanges();
-        }
-
         public List<SelectListItem> ShowAllExerciseInSelectList()
         {
             return _context.Exercises.Select(e => new SelectListItem() { Value = e.Id.ToString(), Text = e.Name }).OrderBy(x => x.Text).ToList();
@@ -43,6 +36,21 @@ namespace BodyProgress.Logic
         public List<PlanItem> ShowPlanItemsBelongingToTrainingPlan(Guid PlanId)
         {
             return _context.PlanItems.Include(x => x.Exercise).Where(x => x.TrainingPlanId == PlanId).ToList();
+        }
+
+        public void AddTrainingPlan(TrainingPlan traningPlan, List<PlanItem> planItems)
+        {
+            _context.TrainingPlans.Add(traningPlan);
+            _context.AddRange(planItems);
+            _context.SaveChanges();
+        }
+
+        public void RemoveTrainingPlan(TrainingPlan trainingPlan)
+        {
+            var planItems = _context.PlanItems.Where(x => x.TrainingPlanId == trainingPlan.Id);
+            _context.Remove(trainingPlan);
+            _context.RemoveRange(planItems);
+            _context.SaveChanges();
         }
     }
 }

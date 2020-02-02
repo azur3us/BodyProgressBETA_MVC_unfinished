@@ -9,6 +9,7 @@ namespace BodyProgress.ViewModels
     public class ShowAllCreatedTrainingPlanViewModel
     {
         //public Guid TrainingPlanId { get; set; }
+        public Guid PlanId { get; set; }
         public List<TrainingPlan> TrainingPlans;
         public int Counter { get; set; } = 1;
     }

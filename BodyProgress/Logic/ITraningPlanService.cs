@@ -8,10 +8,11 @@ namespace BodyProgress.Logic
 {
     public interface ITrainingPlanService
     {
-        void AddTrainingPlan(TrainingPlan traningPlan, List<PlanItem> planItems);
         List<SelectListItem> ShowAllExerciseInSelectList();
         List<TrainingPlan> ReturnAllCreatedTrainingPlans(string creatorId);
         TrainingPlan TakeTrainingPlanById(Guid Id);
         List<PlanItem> ShowPlanItemsBelongingToTrainingPlan(Guid PlanId);
+        void AddTrainingPlan(TrainingPlan traningPlan, List<PlanItem> planItems);
+        void RemoveTrainingPlan(TrainingPlan trainingPlan);
     }
 }
