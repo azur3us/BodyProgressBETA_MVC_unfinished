@@ -7,7 +7,6 @@
         <ul class="list-group">
             <li class="list-group-item">
                 <b>@exercise.Name</b>
-                @exercise.PartOfBody.Name
                 <div class="d-flex">
                     <form asp-action="DeleteExercise" asp-controller="Exercise" asp-route-Id="@exercise.Id">
                             <input type="submit" value="Usuń" class="border-0 bg-white text-danger"/>

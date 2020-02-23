@@ -31,8 +31,7 @@ namespace BodyProgress.Controlles
         {
             var exercise = new Exercise()
             {
-                Name = model.Name,
-                PartOfBodyId = model.PartOfBodyId
+                Name = model.Name
             };
 
             if (ModelState.IsValid)
@@ -45,7 +44,7 @@ namespace BodyProgress.Controlles
         }
 
         [HttpPost]
-        public IActionResult DeleteExercise(Guid Id)
+        public IActionResult DeleteExercise(int Id)
         {
             var exercise = _exerciseService.TakeExerciseById(Id);
             _exerciseService.DeleteExercise(exercise);
@@ -54,7 +53,7 @@ namespace BodyProgress.Controlles
         }
 
         [HttpGet]
-        public IActionResult EditExercise(Guid Id)
+        public IActionResult EditExercise(int Id)
         {
 
             var exercise = _exerciseService.TakeExerciseById(Id);
@@ -85,7 +84,7 @@ namespace BodyProgress.Controlles
         [HttpGet]
         public IActionResult ShowAllExercises()
         {
-            var exercises = _exerciseService.ReturnAllExercises().OrderBy(x => x.PartOfBody.Name);
+            var exercises = _exerciseService.ReturnAllExercises();
 
             var exerciseViewModel = new ExerciseViewModel()
             {

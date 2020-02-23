@@ -36,14 +36,14 @@ namespace BodyProgress.Logic
             _context.SaveChanges();
         }
 
-        public Exercise TakeExerciseById(Guid Id)
+        public Exercise TakeExerciseById(int Id)
         {
             return _context.Exercises.FirstOrDefault(x => x.Id == Id);
         }
 
         public List<Exercise> ReturnAllExercises()
         {
-            return _context.Exercises.Include(x => x.PartOfBody).ToList();
+            return _context.Exercises.ToList();
         }
 
         public List<SelectListItem> ShowPartOfBodyToSelect()

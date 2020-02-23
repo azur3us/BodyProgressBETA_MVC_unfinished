@@ -11,18 +11,8 @@ namespace BodyProgress.Models
 {
     public class Exercise
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
-        public Guid Id { get; set; }
+    
+        public int Id { get; set; }
         public string Name { get; set; }
-
-        public Guid PartOfBodyId { get; set; }
-        public PartOfBody PartOfBody { get; set; }
-
-        public Exercise()
-        {
-            this.Id = System.Guid.NewGuid();
-        }
-   
     }
 }

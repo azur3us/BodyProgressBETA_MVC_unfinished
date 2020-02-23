@@ -10,7 +10,7 @@ namespace BodyProgress.Logic
     public interface IExerciseService
     {
         List<Exercise> ReturnAllExercises();
-        Exercise TakeExerciseById(Guid Id);
+        Exercise TakeExerciseById(int Id);
         void CreateExercise(Exercise exercise);
         void DeleteExercise(Exercise exercise);
         void EditExercise(Exercise exercise);

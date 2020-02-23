@@ -14,7 +14,7 @@ namespace BodyProgress.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Exercise>().Property(e => e.Id).HasDefaultValueSql("NEWID()");
+           
         }
 
         public DbSet<Exercise> Exercises { get; set; }  

@@ -8,15 +8,10 @@ using System.Threading.Tasks;
 namespace BodyProgress.Models
 {
     public class PartOfBody
-    {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    {     
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
-
-        public PartOfBody()
-        {
-            this.Id = System.Guid.NewGuid();
-        }
     }
+
 }

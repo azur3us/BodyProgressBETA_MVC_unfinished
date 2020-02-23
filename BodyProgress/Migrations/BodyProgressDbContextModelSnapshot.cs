@@ -21,29 +21,25 @@ namespace BodyProgress.Migrations
 
             modelBuilder.Entity("BodyProgress.Models.Exercise", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasDefaultValueSql("NEWID()");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("PartOfBodyId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PartOfBodyId");
 
                     b.ToTable("Exercises");
                 });
 
             modelBuilder.Entity("BodyProgress.Models.PartOfBody", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -62,6 +58,9 @@ namespace BodyProgress.Migrations
                     b.Property<Guid>("ExerciseId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int?>("ExerciseId1")
+                        .HasColumnType("int");
+
                     b.Property<int>("Reps")
                         .HasColumnType("int");
 
@@ -73,7 +72,7 @@ namespace BodyProgress.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExerciseId");
+                    b.HasIndex("ExerciseId1");
 
                     b.HasIndex("TrainingPlanId");
 
@@ -298,22 +297,11 @@ namespace BodyProgress.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("BodyProgress.Models.Exercise", b =>
-                {
-                    b.HasOne("BodyProgress.Models.PartOfBody", "PartOfBody")
-                        .WithMany()
-                        .HasForeignKey("PartOfBodyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("BodyProgress.Models.PlanItem", b =>
                 {
                     b.HasOne("BodyProgress.Models.Exercise", "Exercise")
                         .WithMany()
-                        .HasForeignKey("ExerciseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ExerciseId1");
 
                     b.HasOne("BodyProgress.Models.TrainingPlan", "TrainingPlan")
                         .WithMany("PlanItems")
