@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace BodyProgress
 {
@@ -24,9 +25,9 @@ namespace BodyProgress
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddTransient<IExerciseService, ExerciseService>();
-            services.AddTransient<IPartOfBodyService, PartOfBodyService>();
-            services.AddTransient<ITrainingPlanService, TrainingPlanService>();
+            services.AddScoped<IExerciseService, ExerciseService>();
+            services.AddScoped<IPartOfBodyService, PartOfBodyService>();
+            services.AddScoped<ITrainingPlanService, TrainingPlanService>();
             services.AddMvc()
                 .AddRazorRuntimeCompilation()
                 .AddFluentValidation(mvcConfiguration => mvcConfiguration.RegisterValidatorsFromAssemblyContaining<Startup>());
@@ -37,7 +38,11 @@ namespace BodyProgress
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseDeveloperExceptionPage();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            //app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseAuthentication();

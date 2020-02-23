@@ -1,14 +1,20 @@
 ﻿@model ExerciseViewModel
 
+<div class="m-lg-5 m-md-5 m-sm-5 m-1">
+    @foreach (var exercise in Model.Exercises)
+    {
 
-@foreach (var exercise in Model.Exercises)
-{
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-            <b>@exercise.Name</b>
-            @exercise.PartOfBody.Name
-            <a asp-action="DeleteExercise" asp-controller="Exercise" asp-route-Id="@exercise.Id">Usuń</a>
-            <a asp-action="EditExercise" asp-controller="Exercise" asp-route-Id="@exercise.Id">Edytuj</a>
-        </li>
-    </ul>
-}
+        <ul class="list-group">
+            <li class="list-group-item">
+                <b>@exercise.Name</b>
+                @exercise.PartOfBody.Name
+                <div class="d-flex">
+                    <form asp-action="DeleteExercise" asp-controller="Exercise" asp-route-Id="@exercise.Id">
+                            <input type="submit" value="Usuń" class="border-0 bg-white text-danger"/>
+                    </form>
+                    <a asp-action="EditExercise" asp-controller="Exercise" asp-route-Id="@exercise.Id">Edytuj</a>
+                </div>
+            </li>
+        </ul>
+    }
+</div>

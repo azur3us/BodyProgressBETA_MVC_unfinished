@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BodyProgress.Migrations
 {
     [DbContext(typeof(BodyProgressDbContext))]
-    [Migration("20200130172819_AddTrainingPlanName")]
-    partial class AddTrainingPlanName
+    [Migration("20200223104212_AddMyTables")]
+    partial class AddMyTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

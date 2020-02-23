@@ -1,7 +1,6 @@
 ﻿using BodyProgress.Logic;
 using BodyProgress.Models;
 using BodyProgress.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -28,7 +27,6 @@ namespace BodyProgress.Controlles
         }
 
         [HttpPost]
-        //[Authorize(Roles = "Admin")]
         public IActionResult AddExercise(ExerciseViewModel model)
         {
             var exercise = new Exercise()
@@ -46,26 +44,8 @@ namespace BodyProgress.Controlles
             return View();
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult DeleteExercise(Guid Id)
-        {
-            var exercise = _exerciseService.TakeExerciseById(Id);
-            if (exercise == null)
-            {
-                return NotFound();
-            }
-
-            var exerciseViewModel = new DeleteExerciseViewModel()
-            {
-                Id = exercise.Id,
-                Name = exercise.Name
-            };
-
-            return View(exerciseViewModel);
-        }
-
-        [HttpPost, ActionName("DeleteExercise")]
-        public IActionResult DeleteConfirmed(Guid Id)
         {
             var exercise = _exerciseService.TakeExerciseById(Id);
             _exerciseService.DeleteExercise(exercise);
