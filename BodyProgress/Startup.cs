@@ -26,7 +26,7 @@ namespace BodyProgress
         {
 
             services.AddScoped<IExerciseService, ExerciseService>();
-            services.AddScoped<IPartOfBodyService, PartOfBodyService>();
+            services.AddScoped<IBodyPartsSizeService, BodyPartsSizeService>();
             services.AddScoped<ITrainingPlanService, TrainingPlanService>();
             services.AddMvc()
                 .AddRazorRuntimeCompilation()

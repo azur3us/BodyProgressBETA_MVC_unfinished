@@ -22,15 +22,15 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a asp-action="CreateTrainingPlan" asp-controller="TrainingPlan" class="nav-link">Stwórz plan</a>
+                        <a asp-action="CreateTrainingPlan" asp-controller="TrainingPlan" class="nav-link text-success">Stwórz plan</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Ćwiczenia
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a asp-action="AddExercise" asp-controller="Exercise" class="dropdown-item">Dodaj ćwiczenie</a>
-                            <a asp-action="ShowAllExercises" asp-controller="Exercise" class="dropdown-item">Pokaż ćwiczenia</a>
+                            <a asp-action="AddExercise" asp-controller="Administration" class="dropdown-item">Dodaj ćwiczenie</a>
+                            <a asp-action="ShowAllExercises" asp-controller="Administration" class="dropdown-item">Pokaż ćwiczenia</a>
                         </div>
                     </li>
                 </ul>
@@ -44,6 +44,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a asp-action="ShowAllCreatedTrainingPlan" asp-controller="TrainingPlan" class="dropdown-item">Plany treningowe</a>
+                                    <a asp-action="ShowUserBodyParts" asp-controller="Account" class="dropdown-item">Moje ciało</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="text-decoration-none dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a>
                                 </div>

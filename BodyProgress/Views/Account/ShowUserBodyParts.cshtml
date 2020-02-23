@@ -1,0 +1,7 @@
+﻿@model BodyPartsViewModel
+
+
+@foreach(var body in Model.bodyPartsList)
+{
+    <h4>@body.BodyPartName @body.CurrentSize @body.LastSize Proges:@(body.CurrentSize - body.LastSize)</h4>
+}

@@ -46,11 +46,11 @@ namespace BodyProgress.Controlles
                 TrainingPlanName = model.TrainingPlanName,
                 PlanItems = model.PlanItems.Select(x => new PlanItem()
                 {
-                    //ExerciseId = x.ExerciseId,
+                    ExerciseId = x.ExerciseId,
                     Reps = x.Reps,
                     Weight = x.Weight
                 }).ToList()
-            };
+            }; 
 
             _trainingPlanService.AddTrainingPlan(newTrainingPlan, newTrainingPlan.PlanItems);
 

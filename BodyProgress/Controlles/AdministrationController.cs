@@ -4,6 +4,7 @@ using BodyProgress.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using System.Security.Permissions;
 using System.Threading.Tasks;
 
@@ -11,13 +12,15 @@ namespace BodyProgress.Controlles
 {
     public class AdministrationController : Controller
     {
-        private readonly IPartOfBodyService _partOfBodyService;
+       
+        private readonly IExerciseService _exerciseService;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AdministrationController(IPartOfBodyService partOfBodyService, RoleManager<IdentityRole> roleManager)
+        public AdministrationController(RoleManager<IdentityRole> roleManager, IExerciseService exerciseService)
         {
             _roleManager = roleManager;
-            _partOfBodyService = partOfBodyService;
+           
+            _exerciseService = exerciseService;
         }
 
         [HttpGet]
@@ -52,24 +55,72 @@ namespace BodyProgress.Controlles
             return View(model);
         }
 
-        [HttpGet]
-        public IActionResult AddPartOfBody()
-        {
-            return View();
-        }
-
         [HttpPost]
-        public IActionResult AddPartOfBody(PartOfBodyViewModel model)
+        public IActionResult AddExercise(ExerciseViewModel model)
         {
-            var partOfBody = new PartOfBody()
+            var exercise = new Exercise()
             {
                 Name = model.Name
             };
 
-            _partOfBodyService.AddParfOfBody(partOfBody);
+            if (ModelState.IsValid)
+            {
+                _exerciseService.CreateExercise(exercise);
+                return RedirectToAction("AddExercise");
+            }
 
-            return RedirectToAction("AddPartOfBody");
+            return View();
+        }
 
+        [HttpPost]
+        public IActionResult DeleteExercise(int Id)
+        {
+            var exercise = _exerciseService.TakeExerciseById(Id);
+            _exerciseService.DeleteExercise(exercise);
+
+            return RedirectToAction("ShowAllExercises", "Exercise");
+        }
+
+        [HttpGet]
+        public IActionResult EditExercise(int Id)
+        {
+
+            var exercise = _exerciseService.TakeExerciseById(Id);
+
+            var exerciseViewModel = new EditExerciseViewModel()
+            {
+                Id = exercise.Id,
+                Name = exercise.Name
+            };
+
+            return View(exerciseViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult EditExercise(EditExerciseViewModel model)
+        {
+            var exercise = new Exercise()
+            {
+                Id = model.Id,
+                Name = model.Name
+            };
+            _exerciseService.EditExercise(exercise);
+
+            return RedirectToAction("ShowAllExercises", "Exercise");
+
+        }
+
+        [HttpGet]
+        public IActionResult ShowAllExercises()
+        {
+            var exercises = _exerciseService.ReturnAllExercises();
+
+            var exerciseViewModel = new ExerciseViewModel()
+            {
+                Exercises = exercises.ToList()
+            };
+
+            return View(exerciseViewModel);
         }
 
     }

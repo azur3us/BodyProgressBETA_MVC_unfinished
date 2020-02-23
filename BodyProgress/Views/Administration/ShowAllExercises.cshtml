@@ -8,7 +8,7 @@
             <li class="list-group-item">
                 <b>@exercise.Name</b>
                 <div class="d-flex">
-                    <form asp-action="DeleteExercise" asp-controller="Exercise" asp-route-Id="@exercise.Id">
+                    <form asp-action="DeleteExercise" asp-controller="Administration" asp-route-Id="@exercise.Id">
                             <input type="submit" value="Usuń" class="border-0 bg-white text-danger"/>
                     </form>
                     <a asp-action="EditExercise" asp-controller="Exercise" asp-route-Id="@exercise.Id">Edytuj</a>
