@@ -14,7 +14,7 @@ namespace BodyProgress.ViewModels
     {
         public string Name { get; set; }
         public List<Exercise> Exercises { get; set; }
-        public List<SelectListItem> PartOfBodies { get; set; }
-        public Guid PartOfBodyId { get; set; }
+        // public List<SelectListItem> PartOfBodies { get; set; }
+        // public Guid PartOfBodyId { get; set; }
     }
 }

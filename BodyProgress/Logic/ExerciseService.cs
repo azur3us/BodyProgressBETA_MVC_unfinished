@@ -46,10 +46,10 @@ namespace BodyProgress.Logic
             return _context.Exercises.ToList();
         }
 
-        public List<SelectListItem> ShowPartOfBodyToSelect()
-        {
-            return _context.PartOfBodies.Select(a => new SelectListItem() { Value = a.Id.ToString(), Text = a.Name }).ToList();
-        }
+        // public List<SelectListItem> ShowPartOfBodyToSelect()
+        // {
+        //     return _context.PartOfBodies.Select(a => new SelectListItem() { Value = a.Id.ToString(), Text = a.Name }).ToList();
+        // }
 
     }
 }

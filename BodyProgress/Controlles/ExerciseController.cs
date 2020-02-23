@@ -19,11 +19,7 @@ namespace BodyProgress.Controlles
         [HttpGet]
         public IActionResult AddExercise()
         {
-            var myVM = new ExerciseViewModel()
-            {
-                PartOfBodies = _exerciseService.ShowPartOfBodyToSelect()
-            };
-            return View(myVM);
+            return View();
         }
 
         [HttpPost]
