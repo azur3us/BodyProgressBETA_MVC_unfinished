@@ -15,7 +15,7 @@ namespace BodyProgress.Models
         public Guid TrainingPlanId { get; set; }
         public TrainingPlan TrainingPlan { get; set; }
 
-        public Guid ExerciseId { get; set; }
+        public int ExerciseId { get; set; }
         public Exercise Exercise { get; set; }
     }
 }

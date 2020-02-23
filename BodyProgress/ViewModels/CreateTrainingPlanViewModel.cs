@@ -23,7 +23,7 @@ namespace BodyProgress.ViewModels
 
     public class PlanItemModel
     {
-        public Guid ExerciseId { get; set; }
+        public int ExerciseId { get; set; }
         public decimal Weight { get; set; }
         public int Reps { get; set; }
     }
