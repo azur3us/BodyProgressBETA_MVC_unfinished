@@ -20,25 +20,35 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a asp-action="AddExercise" asp-controller="Exercise" class="nav-link">Dodaj ćwiczenie</a>
-                    </li>
-                    <li class="nav-item">
-                        <a asp-action="ShowAllExercises" asp-controller="Exercise" class="nav-link">Pokaż ćwiczenia</a>
-                    </li>
+                <ul class="navbar-nav">                   
                     <li class="nav-item">
                         <a asp-action="CreateTrainingPlan" asp-controller="TrainingPlan" class="nav-link">Stwórz plan</a>
                     </li>
-                    <li class="nav-item">
-                        <a asp-action="ShowAllCreatedTrainingPlan" asp-controller="TrainingPlan" class="nav-link">Pokaż moje plany treningowe</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Ćwiczenia
+        </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a asp-action="AddExercise" asp-controller="Exercise" class="dropdown-item">Dodaj ćwiczenie</a>
+                            <a asp-action="ShowAllExercises" asp-controller="Exercise" class="dropdown-item">Pokaż ćwiczenia</a>     
+        </div>
                     </li>
                 </ul>
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <form asp-controller="Account" asp-action="Logout" id="logoutForm" method="post" class="ml-auto">
                         <ul class="m-0 p-0">
-                            <li class="nav-link text-warning">@User.Identity.Name <a class="text-decoration-none" href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a></li>
+                            <li class="nav-link dropdown text-warning">
+                                               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         @User.Identity.Name 
+        </a>
+               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                     <a asp-action="ShowAllCreatedTrainingPlan" asp-controller="TrainingPlan" class="dropdown-item">Pokaż moje plany treningowe</a>    
+                     <div class="dropdown-divider"></div>    
+                     <a class="text-decoration-none dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a>
+        </div>
+                                       
+                            </li>
 
                         </ul>
                     </form>
