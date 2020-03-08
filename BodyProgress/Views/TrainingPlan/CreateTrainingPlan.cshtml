@@ -1,13 +1,13 @@
 ﻿@model CreateTrainingPlanViewModel
 
-    <h2 class="d-flex justify-content-center mt-3 mb-3">Utwórz Plan Treningu</h2>
+<h2 class="d-flex justify-content-center mt-3 mb-3">Utwórz Plan Treningu</h2>
 
 <div id="create-training">
     <form asp-action="CreateTrainingPlan" method="post">
-        <input type="hidden" asp-for="CreatorId" />
+        <input type="hidden" asp-for="CreatorId"/>
         <div class="form-group m-3">
             <label class="font-weight-bold" asp-for="TrainingPlanName">Nazwa planu</label>
-            <input class="form-control" asp-for="TrainingPlanName" />
+            <input class="form-control" asp-for="TrainingPlanName"/>
             <div class="border-top border-primary my-5"></div>
         </div>
         <div class="form-group m-3">
@@ -18,18 +18,17 @@
                 </div>
                 <div class="form-group">
                     <label>Obciążenie (kg): </label>
-                    <input class="form-control" type="number" v-model="planItem.weight" :name="`PlanItems[${index}].Weight`" />
-                </div>
-                <div class="form-group">
+                    <input class="form-control" type="number" v-model="planItem.weight" :name="`PlanItems[${index}].Weight`"/>
                     <label>Ilość powtórzeń: </label>
-                    <input class="form-control" type="number" v-model="planItem.reps" :name="`PlanItems[${index}].Reps`" />
+                    <input class="form-control" type="number" v-model="planItem.reps" :name="`PlanItems[${index}].Reps`"/>
+                    <div class="border-top border-primary my-5"></div>
                 </div>
-                <div class="border-top border-primary my-5"></div>
+
             </div>
             <button v-on:click.prevent="addNext" class="btn btn-success">+ Dodaj ćwiczenie </button>
         </div>
         <div class="form-group m-5">
-            <input type="submit" value="Utwórz plan" class="btn btn-primary form-control" />
+            <input type="submit" value="Utwórz plan" class="btn btn-primary form-control"/>
         </div>
     </form>
 </div>

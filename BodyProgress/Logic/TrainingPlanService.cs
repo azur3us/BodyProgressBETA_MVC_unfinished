@@ -42,7 +42,7 @@ namespace BodyProgress.Logic
         public List<PlanItem> ShowPlanItemsBelongingToTrainingPlan(Guid PlanId)
         {
             return _context.PlanItems
-                .Include(x => x.Exercise.Name)
+                .Include(x => x.Exercise)
                 .Where(x => x.TrainingPlanId == PlanId)
                 .ToList();
         }

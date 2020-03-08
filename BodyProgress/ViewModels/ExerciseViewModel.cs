@@ -13,6 +13,6 @@ namespace BodyProgress.ViewModels
     public class ExerciseViewModel
     {
         public string Name { get; set; }
-        public IEnumerable<Exercise> Exercises { get; set; }
+        public IQueryable<Exercise> Exercises { get; set; }
     }
 }
