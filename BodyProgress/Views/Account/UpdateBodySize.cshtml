@@ -1,18 +1,59 @@
-﻿@model TModel
+﻿@model BodyPartsViewModel
 
-@{
-    Layout = null;
-}
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-<div>
+<div class="d-flex justify-content-center mt-3">
+    <form asp-action="UpdateBodySize" method="post">
+        
+           
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Nazwa parti</th>
+                    <th scope="col">Ostani pomiar</th>
+                    <th scope="col">Obecny pomiar</th>
+                    <th scope="col">Rezultat</th>
+                </tr>
+                </thead>
+                @for (var i = 0; i < Model.bodyPartsList.Count; i++)
+                        {
+                            <input type="hidden" asp-for="@Model.bodyPartsList[i].Id"/>
+                <tbody>
+                <tr>
+                    <td>@Model.bodyPartsList[i].BodyPart.Name</td>
+                    <td><input asp-for="@Model.bodyPartsList[i].LastSize" maxlength="6" size="6"/> </td>
+                    <td><input asp-for="@Model.bodyPartsList[i].CurrentSize" maxlength="6" size="6"/></td>
+                    @if(@Model.Result[i] > 0)
+                    {
+                        <td class="text-success">+@Model.Result[i]</td>
+                    }
+                    else
+                    {
+                        <td class="text-danger">@Model.Result[i]</td>
+                    }
+                </tr>
+              
+                </tbody>
+                  }
+            </table>
       
+        <div class="form-group d-flex justify-content-center">
+            <input type="submit" value="Zapisz zmiany" class="btn btn-success"/>
+        </div>
+    </form>
 </div>
-</body>
-</html>
+
+
+@* @for (var i = 0; i < Model.bodyPartsList.Count; i++) *@
+@* { *@
+@*     <input type="hidden" asp-for="@Model.bodyPartsList[i].Id"/> *@
+@*     <div class="d-flex justify-content-center mb-2">@Model.bodyPartsList[i].BodyPart.Name</div> *@
+@*     <div class="form-group"> *@
+@*         <label>Ostatni: </label>  *@
+@*         <input asp-for="@Model.bodyPartsList[i].LastSize"/> *@
+@*         <label>Obecny: </label> *@
+@*         <input asp-for="@Model.bodyPartsList[i].CurrentSize"/>  *@
+@*     </div> *@
+@* } *@
+@* <div class="form-group d-flex justify-content-center"> *@
+@*     <input type="submit" value="Zapisz zmiany" class="btn btn-success"/> *@
+@* </div> *@

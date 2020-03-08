@@ -8,6 +8,7 @@ namespace BodyProgress.ViewModels
 {
     public class BodyPartsViewModel
     {
-        public List<BodyPartsSize> bodyPartsList { get; set; }
+        public List<BodyPartSize> bodyPartsList { get; set; }
+        public decimal?[] Result { get; set; }
     }
 }

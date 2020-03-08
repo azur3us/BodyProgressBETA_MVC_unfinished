@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BodyProgress.Models
 {
-    public class Exercise
+    public class Exercise : IEntity
     {  
         public int Id { get; set; }
         public string Name { get; set; }

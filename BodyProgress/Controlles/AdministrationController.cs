@@ -12,14 +12,13 @@ namespace BodyProgress.Controlles
 {
     public class AdministrationController : Controller
     {
-       
         private readonly IExerciseService _exerciseService;
         private readonly RoleManager<IdentityRole> _roleManager;
 
         public AdministrationController(RoleManager<IdentityRole> roleManager, IExerciseService exerciseService)
         {
             _roleManager = roleManager;
-           
+
             _exerciseService = exerciseService;
         }
 
@@ -32,7 +31,7 @@ namespace BodyProgress.Controlles
         [HttpPost]
         public async Task<IActionResult> CreateRole(CreateRoleViewModel model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 IdentityRole identityRole = new IdentityRole
                 {
@@ -41,12 +40,12 @@ namespace BodyProgress.Controlles
 
                 IdentityResult result = await _roleManager.CreateAsync(identityRole);
 
-                if(result.Succeeded)
+                if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home"); 
+                    return RedirectToAction("Index", "Home");
                 }
 
-                foreach(IdentityError error in result.Errors)
+                foreach (IdentityError error in result.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
                 }
@@ -55,8 +54,14 @@ namespace BodyProgress.Controlles
             return View(model);
         }
 
+        [HttpGet]
+        public IActionResult AddExercise()
+        {
+            return View();
+        }
+
         [HttpPost]
-        public IActionResult AddExercise(ExerciseViewModel model)
+        public async Task<IActionResult> AddExercise(ExerciseViewModel model)
         {
             var exercise = new Exercise()
             {
@@ -65,7 +70,7 @@ namespace BodyProgress.Controlles
 
             if (ModelState.IsValid)
             {
-                _exerciseService.CreateExercise(exercise);
+                await _exerciseService.CreateExercise(exercise);
                 return RedirectToAction("AddExercise");
             }
 
@@ -73,19 +78,18 @@ namespace BodyProgress.Controlles
         }
 
         [HttpPost]
-        public IActionResult DeleteExercise(int Id)
+        public async Task<IActionResult> DeleteExercise(int id)
         {
-            var exercise = _exerciseService.TakeExerciseById(Id);
-            _exerciseService.DeleteExercise(exercise);
+            var exercise = await _exerciseService.TakeExerciseById(id);
+            await _exerciseService.DeleteExercise(exercise.Id);
 
-            return RedirectToAction("ShowAllExercises", "Exercise");
+            return RedirectToAction("ShowAllExercises", "Administration");
         }
 
         [HttpGet]
-        public IActionResult EditExercise(int Id)
+        public async Task<IActionResult> EditExercise(int id)
         {
-
-            var exercise = _exerciseService.TakeExerciseById(Id);
+            var exercise = await _exerciseService.TakeExerciseById(id);
 
             var exerciseViewModel = new EditExerciseViewModel()
             {
@@ -97,31 +101,28 @@ namespace BodyProgress.Controlles
         }
 
         [HttpPost]
-        public IActionResult EditExercise(EditExerciseViewModel model)
+        public async Task<IActionResult> EditExercise(EditExerciseViewModel model)
         {
             var exercise = new Exercise()
             {
-                Id = model.Id,
                 Name = model.Name
             };
-            _exerciseService.EditExercise(exercise);
+            await _exerciseService.EditExercise(exercise);
 
-            return RedirectToAction("ShowAllExercises", "Exercise");
-
+            return RedirectToAction("ShowAllExercises", "Administration");
         }
 
         [HttpGet]
         public IActionResult ShowAllExercises()
         {
-            var exercises = _exerciseService.ReturnAllExercises();
+            var exercises = _exerciseService.ReturnAllExercises().Where(x => x.Name =="Pompki");
 
             var exerciseViewModel = new ExerciseViewModel()
             {
-                Exercises = exercises.ToList()
+                Exercises = exercises
             };
 
             return View(exerciseViewModel);
         }
-
     }
 }

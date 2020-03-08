@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 
 namespace BodyProgress.Logic
 {
-    public interface IExerciseService
+    public interface IExerciseService : IBaseRepository<Exercise>
     {
-        List<Exercise> ReturnAllExercises();
-        Exercise TakeExerciseById(int Id);
-        void CreateExercise(Exercise exercise);
-        void DeleteExercise(Exercise exercise);
-        void EditExercise(Exercise exercise);
-        // List<SelectListItem> ShowPartOfBodyToSelect();
-
+        IQueryable<Exercise> ReturnAllExercises();
+        Task<Exercise> TakeExerciseById(int id);
+        Task CreateExercise(Exercise exercise);
+        Task DeleteExercise(int id);
+        Task EditExercise(Exercise exercise);
     }
 }

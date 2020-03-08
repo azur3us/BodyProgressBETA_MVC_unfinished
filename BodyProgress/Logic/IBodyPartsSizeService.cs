@@ -5,7 +5,10 @@ namespace BodyProgress.Logic
 {
     public interface IBodyPartsSizeService
     {
-        void CreateBodyParts(List<BodyPartsSize> bodyPartsSize);
-        List<BodyPartsSize> ShowAllBodyParts(string userId);
+        void CreateUserBody(UserBody userBody, List<BodyPartSize> bodyPartsSize);
+        void UpdateUserBody(List<BodyPartSize> bodyPartSizes);
+        List<BodyPart> GetAllBodyParts();
+        List<BodyPartSize> ShowUserBodyParts(string userId);
+        
     }
 }

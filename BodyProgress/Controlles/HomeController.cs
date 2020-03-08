@@ -10,7 +10,7 @@ namespace BodyProgress.Controlles
     {
         public IActionResult Index()
         {
-            ViewBag.Title = "Cos";
+            ViewBag.Title = "BodyProgress";
 
             return View();
         }

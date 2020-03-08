@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace BodyProgress.Logic
 {
@@ -14,16 +15,30 @@ namespace BodyProgress.Logic
         {
             _context = context;
         }
-
-        public void CreateBodyParts(List<BodyPartsSize> bodyPartsSize)
+        
+        public void CreateUserBody(UserBody userBody, List<BodyPartSize> bodyPartsSize)
         {
-            _context.AddRange(bodyPartsSize);
+            _context.BodyPartsSizes.AddRange(bodyPartsSize);
+            _context.UserBodies.Add(userBody);  
             _context.SaveChanges();
         }
 
-        public List<BodyPartsSize> ShowAllBodyParts(string userId)
+        public void UpdateUserBody(List<BodyPartSize> bodyPartSizes)
         {
-            return _context.BodyPartsSizes.Where(b => b.UserId == userId).ToList();
+            _context.BodyPartsSizes.UpdateRange(bodyPartSizes);
+            _context.SaveChanges();
+        }
+
+        public List<BodyPart> GetAllBodyParts()
+        {
+            return _context.BodyParts.ToList();
+        }
+
+        public List<BodyPartSize> ShowUserBodyParts(string userId)
+        {
+            return _context.BodyPartsSizes
+                .Include(x => x.BodyPart)
+                .Where(x => x.UserBody.UserId == userId).ToList();
         }
     }
 }

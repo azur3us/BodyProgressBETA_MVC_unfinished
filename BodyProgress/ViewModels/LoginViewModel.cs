@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using BodyProgress.Models;
 
 namespace BodyProgress.ViewModels
 {
@@ -9,5 +11,9 @@ namespace BodyProgress.ViewModels
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        public List<BodyPart> BodyParts { get; set; }
+
+        
     }
 }

@@ -44,7 +44,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a asp-action="ShowAllCreatedTrainingPlan" asp-controller="TrainingPlan" class="dropdown-item">Plany treningowe</a>
-                                    <a asp-action="ShowUserBodyParts" asp-controller="Account" class="dropdown-item">Moje ciało</a>
+                                    <a asp-action="UpdateBodySize" asp-controller="Account" class="dropdown-item">Moje ciało</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="text-decoration-none dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a>
                                 </div>
@@ -67,9 +67,9 @@
                 }
             </div>
         </nav>
-        <div>
+       
             @RenderBody()
-        </div>
+ 
     </div>
     <footer class="footer">
         <div class="container">

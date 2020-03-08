@@ -8,16 +8,17 @@ using System.Threading.Tasks;
 
 namespace BodyProgress.Models
 {
-    public class BodyPartsSize
+    public class BodyPartSize
     {     
         public int Id { get; set; }
         public decimal? CurrentSize { get; set; }
         public decimal? LastSize { get; set; }
 
-        public string UserId { get; set; }
-        public IdentityUser User { get; set; }
-        
-        public List<BodyPart> BodyParts { get; set; }
+        public int UserBodyId { get; set; }
+        public UserBody UserBody { get; set; }
+
+        public int BodyPartId { get; set; }    
+        public BodyPart BodyPart { get; set; }
     }
 
 }

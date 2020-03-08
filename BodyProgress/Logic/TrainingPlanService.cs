@@ -20,12 +20,18 @@ namespace BodyProgress.Logic
 
         public List<SelectListItem> ShowAllExerciseInSelectList()
         {
-            return _context.Exercises.Select(e => new SelectListItem() { Value = e.Id.ToString(), Text = e.Name }).OrderBy(x => x.Text).ToList();
+            return _context.Exercises
+                .Select(e => new SelectListItem() { Value = e.Id.ToString(), Text = e.Name })
+                .OrderBy(x => x.Text)
+                .ToList();
         }
 
         public List<TrainingPlan> ReturnAllCreatedTrainingPlans(string creatorId)
         {
-            return _context.TrainingPlans.Where(x => x.UserId == creatorId).OrderByDescending(x => x.CreatedDate).ToList();
+            return _context.TrainingPlans
+                .Where(x => x.UserId == creatorId)
+                .OrderByDescending(x => x.CreatedDate)
+                .ToList();
         }
 
         public TrainingPlan TakeTrainingPlanById(Guid Id)
@@ -35,7 +41,10 @@ namespace BodyProgress.Logic
 
         public List<PlanItem> ShowPlanItemsBelongingToTrainingPlan(Guid PlanId)
         {
-            return _context.PlanItems.Include(x => x.Exercise).Where(x => x.TrainingPlanId == PlanId).ToList();
+            return _context.PlanItems
+                .Include(x => x.Exercise.Name)
+                .Where(x => x.TrainingPlanId == PlanId)
+                .ToList();
         }
 
         public void AddTrainingPlan(TrainingPlan traningPlan, List<PlanItem> planItems)
@@ -52,5 +61,7 @@ namespace BodyProgress.Logic
             _context.RemoveRange(planItems);
             _context.SaveChanges();
         }
+        
+        
     }
 }

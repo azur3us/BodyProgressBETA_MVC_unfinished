@@ -17,7 +17,8 @@ namespace BodyProgress.Controlles
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IBodyPartsSizeService _bodyPartsSize;
 
-        public AccountController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, IBodyPartsSizeService bodyPartsSize)
+        public AccountController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager,
+            IBodyPartsSizeService bodyPartsSize)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -46,6 +47,7 @@ namespace BodyProgress.Controlles
             return View();
         }
 
+        [HttpGet]
         public IActionResult Register()
         {
             return View(new LoginViewModel());
@@ -54,52 +56,25 @@ namespace BodyProgress.Controlles
         [HttpPost]
         public async Task<IActionResult> Register(LoginViewModel loginViewModel)
         {
-            var user = new IdentityUser() { UserName = loginViewModel.UserName };
+            var user = new IdentityUser() {UserName = loginViewModel.UserName};
             var result = await _userManager.CreateAsync(user, loginViewModel.Password);
 
-            List<BodyPartsSize> bodyParts = new List<BodyPartsSize>()
+            loginViewModel.BodyParts = _bodyPartsSize.GetAllBodyParts();
+
+            var userBody = new UserBody()
             {
-                new BodyPartsSize()
+                UserId = user.Id,
+                BodyPartSizes = loginViewModel.BodyParts.Select(x => new BodyPartSize()
                 {
-                    BodyPartName = "Klatka",
-                    UserId = user.Id
-                },
-
-                 new BodyPartsSize()
-                {
-                    BodyPartName = "Plecy",
-                    UserId = user.Id
-                },
-
-                  new BodyPartsSize()
-                {
-                    BodyPartName = "Nogi",
-                    UserId = user.Id
-                },
-
-                   new BodyPartsSize()
-                {
-                    BodyPartName = "Biceps",
-                    UserId = user.Id               },
-
-                    new BodyPartsSize()
-                {
-                    BodyPartName = "Talia",
-                    UserId = user.Id
-                },
-
-                     new BodyPartsSize()
-                {
-                    BodyPartName = "Łydka",
-                    UserId = user.Id
-                }
+                    BodyPartId = x.Id
+                }).ToList()
             };
 
-            _bodyPartsSize.CreateBodyParts(bodyParts);
-            
-
             if (result.Succeeded)
+            {
+                _bodyPartsSize.CreateUserBody(userBody, userBody.BodyPartSizes);
                 return RedirectToAction("Index", "Home");
+            }
 
             return View();
         }
@@ -112,18 +87,39 @@ namespace BodyProgress.Controlles
         }
 
         [HttpGet]
-        public IActionResult ShowUserBodyParts()
+        public IActionResult UpdateBodySize()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var bodyParts = _bodyPartsSize.ShowAllBodyParts(userId);
+            var bodyParts = _bodyPartsSize.ShowUserBodyParts(userId);
 
             var vm = new BodyPartsViewModel()
             {
-                bodyPartsList = bodyParts
+                bodyPartsList = bodyParts,
+                Result = new decimal?[bodyParts.Count]
             };
+
+            for (int i = 0; i < bodyParts.Count; i++)
+            {
+                vm.Result[i] = vm.bodyPartsList[i].CurrentSize - vm.bodyPartsList[i].LastSize;
+            }
 
             return View(vm);
         }
 
+        [HttpPost]
+        public IActionResult UpdateBodySize(BodyPartsViewModel model)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var bodyParts = _bodyPartsSize.ShowUserBodyParts(userId);
+            for (int i = 0; i < bodyParts.Count; i++)
+            {
+                bodyParts[i].LastSize = model.bodyPartsList[i].LastSize;
+                bodyParts[i].CurrentSize = model.bodyPartsList[i].CurrentSize;
+            }
+
+            _bodyPartsSize.UpdateUserBody(bodyParts);
+
+            return RedirectToAction("UpdateBodySize", "Account");
+        }
     }
 }
