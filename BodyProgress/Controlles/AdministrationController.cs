@@ -115,7 +115,7 @@ namespace BodyProgress.Controlles
         [HttpGet]
         public IActionResult ShowAllExercises()
         {
-            var exercises = _exerciseService.ReturnAllExercises().Where(x => x.Name =="Pompki");
+            var exercises = _exerciseService.ReturnAllExercises();
 
             var exerciseViewModel = new ExerciseViewModel()
             {
