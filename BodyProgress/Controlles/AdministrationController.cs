@@ -80,8 +80,7 @@ namespace BodyProgress.Controlles
         [HttpPost]
         public async Task<IActionResult> DeleteExercise(int id)
         {
-            var exercise = await _exerciseService.TakeExerciseById(id);
-            await _exerciseService.DeleteExercise(exercise.Id);
+            await _exerciseService.DeleteExercise(id);
 
             return RedirectToAction("ShowAllExercises", "Administration");
         }
@@ -93,7 +92,6 @@ namespace BodyProgress.Controlles
 
             var exerciseViewModel = new EditExerciseViewModel()
             {
-                Id = exercise.Id,
                 Name = exercise.Name
             };
 
@@ -105,8 +103,11 @@ namespace BodyProgress.Controlles
         {
             var exercise = new Exercise()
             {
-                Name = model.Name
+                Id = model.Id
             };
+
+            exercise.Name = model.Name;
+
             await _exerciseService.EditExercise(exercise);
 
             return RedirectToAction("ShowAllExercises", "Administration");
