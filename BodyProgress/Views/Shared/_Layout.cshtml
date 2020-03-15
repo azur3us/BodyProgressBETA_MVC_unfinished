@@ -4,78 +4,76 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width"/>
     <title>@ViewBag.Title</title>
-    <link href="~/content/login.css" rel="stylesheet" />
-    <link href="~/content/site.css" rel="stylesheet" />
-    <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/content/login.css" rel="stylesheet"/>
+    <link href="~/content/site.css" rel="stylesheet"/>
+    <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="~/lib/jquery/jquery.js"></script>
 </head>
 <body>
-    <div class="content">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-black">
-            <a class="navbar-brand" asp-action="Index" asp-controller="Home">BodyProgress</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a asp-action="CreateTrainingPlan" asp-controller="TrainingPlan" class="nav-link text-success">Stwórz plan</a>
+<div class="content">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+        <a class="navbar-brand" asp-action="Index" asp-controller="Home">BodyProgress</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a asp-action="CreateTrainingPlan" asp-controller="TrainingPlan" class="nav-link text-success">Stwórz plan</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Ćwiczenia
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a asp-action="AddExercise" asp-controller="Administration" class="dropdown-item">Dodaj ćwiczenie</a>
+                        <a asp-action="ShowAllExercises" asp-controller="Administration" class="dropdown-item">Pokaż ćwiczenia</a>
+                    </div>
+                </li>
+            </ul>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <form asp-controller="Account" asp-action="Logout" id="logoutForm" method="post" class="ml-auto">
+                    <ul class="m-0 p-0">
+                        <li class="nav-link dropleft text-warning">
+                            <a class="nav-link dropdown-toggle " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @User.Identity.Name
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a asp-action="ShowAllCreatedTrainingPlan" asp-controller="TrainingPlan" class="dropdown-item">Plany treningowe</a>
+                                <a asp-action="UpdateBodySize" asp-controller="Account" class="dropdown-item">Moje ciało</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="text-decoration-none dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a>
+                            </div>
+
+                        </li>
+
+                    </ul>
+                </form>
+            }
+            else
+            {
+                <ul class="navbar-nav ml-auto">
+                    <li>
+                        <a asp-action="Register" asp-controller="Account" class="nav-link">Rejestracja</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Ćwiczenia
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a asp-action="AddExercise" asp-controller="Administration" class="dropdown-item">Dodaj ćwiczenie</a>
-                            <a asp-action="ShowAllExercises" asp-controller="Administration" class="dropdown-item">Pokaż ćwiczenia</a>
-                        </div>
+                    <li>
+                        <a asp-action="Login" asp-controller="Account" class="nav-link">Zaloguj</a>
                     </li>
                 </ul>
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <form asp-controller="Account" asp-action="Logout" id="logoutForm" method="post" class="ml-auto">
-                        <ul class="m-0 p-0">
-                            <li class="nav-link dropleft text-warning">
-                                <a class="nav-link dropdown-toggle " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    @User.Identity.Name
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a asp-action="ShowAllCreatedTrainingPlan" asp-controller="TrainingPlan" class="dropdown-item">Plany treningowe</a>
-                                    <a asp-action="UpdateBodySize" asp-controller="Account" class="dropdown-item">Moje ciało</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="text-decoration-none dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a>
-                                </div>
-
-                            </li>
-
-                        </ul>
-                    </form>
-                }
-                else
-                {
-                    <ul class="navbar-nav ml-auto">
-                        <li>
-                            <a asp-action="Register" asp-controller="Account" class="nav-link">Rejestracja</a>
-                        </li>
-                        <li>
-                            <a asp-action="Login" asp-controller="Account" class="nav-link">Zaloguj</a>
-                        </li>
-                    </ul>
-                }
-            </div>
-        </nav>
-       
-            @RenderBody()
- 
-    </div>
-    <footer class="footer">
-        <div class="container">
-            <span class="d-flex justify-content-center pt-3">&copy; 2020 BodyProgress, by azure3us</span>
+            }
         </div>
-    </footer>
-    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+    </nav>
+    <div class="appbox">
+        @RenderBody()
+    </div>
+</div>
+<footer class="footer-style">
+    <span class="d-flex justify-content-center pt-3">&copy; 2020 BodyProgress, by azure3us</span>
+</footer>
+<script src="~/lib/bootstrap/js/bootstrap.js"></script>
 </body>
 </html>

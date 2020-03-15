@@ -1,10 +1,9 @@
 ﻿@model BodyPartsViewModel
 
 
-<div class="d-flex justify-content-center mt-3">
+<div class="d-flex justify-content-center mt-3 w-100">
     <form asp-action="UpdateBodySize" method="post">
-        
-           
+              
             <table class="table">
                 <thead>
                 <tr>
@@ -41,19 +40,3 @@
         </div>
     </form>
 </div>
-
-
-@* @for (var i = 0; i < Model.bodyPartsList.Count; i++) *@
-@* { *@
-@*     <input type="hidden" asp-for="@Model.bodyPartsList[i].Id"/> *@
-@*     <div class="d-flex justify-content-center mb-2">@Model.bodyPartsList[i].BodyPart.Name</div> *@
-@*     <div class="form-group"> *@
-@*         <label>Ostatni: </label>  *@
-@*         <input asp-for="@Model.bodyPartsList[i].LastSize"/> *@
-@*         <label>Obecny: </label> *@
-@*         <input asp-for="@Model.bodyPartsList[i].CurrentSize"/>  *@
-@*     </div> *@
-@* } *@
-@* <div class="form-group d-flex justify-content-center"> *@
-@*     <input type="submit" value="Zapisz zmiany" class="btn btn-success"/> *@
-@* </div> *@

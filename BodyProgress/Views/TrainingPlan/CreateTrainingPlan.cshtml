@@ -1,8 +1,9 @@
 ﻿@model CreateTrainingPlanViewModel
 
-<h2 class="d-flex justify-content-center mt-3 mb-3">Utwórz Plan Treningu</h2>
 
-<div id="create-training">
+
+<div id="create-training" class="w-100">
+<h2 class="d-flex justify-content-center mt-3 mb-3">Utwórz Plan Treningu</h2>
     <form asp-action="CreateTrainingPlan" method="post">
         <input type="hidden" asp-for="CreatorId"/>
         <div class="form-group m-3">
@@ -16,13 +17,28 @@
                     <label asp-for="ExercisesSelectList">Ćwiczenie: </label>
                     <select class="form-control" asp-items="@Model.ExercisesSelectList" v-model="planItem.exerciseId" :name="`PlanItems[${index}].ExerciseId`"></select>
                 </div>
-                <div class="form-group">
-                    <label>Obciążenie (kg): </label>
-                    <input class="form-control" type="number" v-model="planItem.weight" :name="`PlanItems[${index}].Weight`"/>
-                    <label>Ilość powtórzeń: </label>
-                    <input class="form-control" type="number" v-model="planItem.reps" :name="`PlanItems[${index}].Reps`"/>
-                    <div class="border-top border-primary my-5"></div>
-                </div>
+                <table class="table table-dark">
+                    <thead>
+                    <tr>
+                        <th scope="col">Seria</th>
+                        <th scope="col">Obciążenie(kg)</th>
+                        <th scope="col">Ilość powtórzeń</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <input class="form-control" type="number" v-model="planItem.weight" :name="`PlanItems[${index}].Weight`"/>
+                        </td>
+                        <td>
+                            <input class="form-control" type="number" v-model="planItem.reps" :name="`PlanItems[${index}].Reps`"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <button type="button">Dodaj serie</button>
+                <div class="border-top border-primary my-5"></div>
 
             </div>
             <button v-on:click.prevent="addNext" class="btn btn-success">+ Dodaj ćwiczenie </button>
@@ -33,23 +49,4 @@
     </form>
 </div>
 
-<script>
-    const newItem = () => ({
-        exerciseId: null,
-        weight: 0,
-        reps: 0
-    });
-    new Vue({
-        el: '#create-training',
-        data() {
-            return {
-                planItems: [newItem()]
-            }
-        },
-        methods: {
-            addNext() {
-                this.planItems.push(newItem())
-            }
-        }
-    })
-</script>
+<script src="~/scripts/add-next-exercise.js"></script>
